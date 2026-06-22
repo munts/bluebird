@@ -1,0 +1,68 @@
+<flynt-component name="BlockAllLocationsMap" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="map-wrapper">
+    <div class="service-map" id="phc-service-map"></div>
+  </div>
+
+  {% if apiKey %}
+  <script>
+  window._phcMapConfig = {
+    locations: {{ locations|json_encode|raw }},
+    centerLat: {{ centerLat|default('0')|raw }},
+    centerLng: {{ centerLng|default('0')|raw }},
+    zoom:      {{ zoomLevel|default(10)|raw }}
+  };
+
+  window.initPHCServiceMap = function () {
+    var el = document.getElementById('phc-service-map');
+    if (!el || !window._phcMapConfig) return;
+
+    var cfg       = window._phcMapConfig;
+    var locations = Array.isArray(cfg.locations) ? cfg.locations : [];
+
+    var map = new google.maps.Map(el, {
+      center: { lat: cfg.centerLat || 39.5, lng: cfg.centerLng || -98.35 },
+      zoom: cfg.zoom,
+      styles: [
+        {
+          featureType: 'poi',
+          elementType: 'labels',
+          stylers: [{ visibility: 'off' }]
+        }
+      ]
+    });
+
+    var bounds  = new google.maps.LatLngBounds();
+    var markers = [];
+
+    locations.forEach(function (loc) {
+      var position = { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) };
+      bounds.extend(position);
+      markers.push(new google.maps.Marker({ position: position }));
+    });
+
+    if (markers.length > 0) {
+      // Cluster overlapping markers — MarkerClusterer manages rendering onto the map
+      if (window.markerClusterer) {
+        new markerClusterer.MarkerClusterer({ map: map, markers: markers });
+      } else {
+        // Fallback: add markers directly if clusterer didn't load
+        markers.forEach(function (m) { m.setMap(map); });
+      }
+
+      map.fitBounds(bounds);
+
+      // Re-fit on resize so markers stay visible at any viewport width
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          map.fitBounds(bounds);
+        }, 150);
+      });
+    }
+  };
+  </script>
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js" defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&callback=initPHCServiceMap" async defer></script>
+  {% endif %}
+</flynt-component>

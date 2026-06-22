@@ -1,0 +1,30 @@
+/**
+ * Page Templates
+ */
+
+.secondaryPage {
+  &-hero {
+    block-size: clamp(250px, 40vw, 400px);
+    overflow: hidden;
+
+    &-image {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &-content {
+    margin-inline: auto;
+    max-inline-size: 1024px;
+    padding-block: var(--bb-component-spacing);
+    padding-inline: var(--bb-container-spacing);
+
+    img {
+      block-size: auto;
+      inline-size: auto;
+      max-inline-size: 100%;
+    }
+  }
+}

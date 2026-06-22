@@ -1,0 +1,163 @@
+flynt-component[name='BlockCallToAction'] {
+  // Default theme (acts as "none")
+  --heading-color: #000;
+
+  // When a background image is present, switch from margin to padding
+  // so the image fills edge-to-edge
+  &[data-has-bg-image="true"] {
+    margin: 0;
+    padding-block: var(--component-spacing);
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .bg-image {
+    block-size: 100%;
+    inline-size: 100%;
+    inset: 0;
+    overflow: hidden;
+    position: absolute;
+
+    img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .overlay {
+    background-color: var(--overlay-bg);
+    block-size: 100%;
+    inline-size: 100%;
+    inset: 0;
+    opacity: var(--overlay-opacity);
+    position: absolute;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-block-start: var(--flow-space);
+  }
+
+  .btn {
+    --btn-border-radius: 6px;
+    --btn-border-width: 2px;
+
+    appearance: none;
+    border-radius: var(--btn-border-radius);
+    border-style: solid;
+    border-width: var(--btn-border-width);
+    cursor: pointer;
+    display: inline-block;
+    font: inherit;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding-block: calc(0.75rem - var(--btn-border-width));
+    padding-inline: calc(1.5rem - var(--btn-border-width));
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    // Red background, white text
+    &--red {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+
+    // White background, accent text
+    &--white {
+      background-color: #fff;
+      border-color: #fff;
+      color: var(--color-accent);
+    }
+
+    // Transparent background, accent border/text
+    &--outline-red {
+      background-color: transparent;
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    // Transparent background, white border/text
+    &--outline-white {
+      background-color: transparent;
+      border-color: #fff;
+      color: #fff;
+    }
+
+    // Transparent background, black border/text
+    &--outline-black {
+      background-color: transparent;
+      border-color: #000;
+      color: #000;
+    }
+  }
+
+  // Theme overrides
+  &[data-theme="dark"] {
+    --heading-color: #fff;
+
+      .btn {
+      // Force all buttons into white-outline style
+      background-color: transparent;
+      border-color: #fff;
+      color: #fff;
+    }
+  }
+
+  &[data-theme="light"] {
+    --heading-color: hsl(2, 85%, 32%);
+  }
+
+  .eyebrow {
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-block-end: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .subheading {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-block-start: 1rem;
+  }
+
+  p {
+    font-size: 1.525rem;
+  }
+
+  // Headings
+  h2 {
+    color: var(--heading-color);
+    margin-block-start: 0;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color: var(--color-accent-headline);
+    margin-block-start: 15px;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    color: var(--color-accent-headline);
+    font-size: 1.5rem;
+    margin-block-start: 15px;
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,73 @@
+<flynt-component name="FooterColumns" data-theme="dark" id="footer-estimate">
+  <div class="header container">
+    {# <p class="header-eyebrow">Get in Touch</p> #}
+    <h2 class="header-heading">Request Your Free Estimate</h2>
+  </div>
+  <div class="container">
+    <div class="grid">
+
+      {# Column 1: Contact Info #}
+      <div class="col col1">
+        <p class="col1-intro">Ready to get started?</p>
+        <p class="col1-subtext">Give us a call or fill out the form and we'll get back to you right away. No obligation, no hidden fees.</p>
+        <ul class="contactList">
+          {% if phone %}
+            <li class="contactItem">
+              <span class="contactIconWrap" aria-hidden="true">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+              <span class="contactText">
+                <span class="contactLabel">Call Us Anytime</span>
+                <a class="contactValue" href="tel:{{ phone|replace({' ': '', '-': ''}) }}">{{ phone }}</a>
+              </span>
+            </li>
+          {% endif %}
+          {% if email %}
+            <li class="contactItem">
+              <span class="contactIconWrap" aria-hidden="true">
+                <i class="fa-solid fa-envelope"></i>
+              </span>
+              <span class="contactText">
+                <span class="contactLabel">Email Us</span>
+                <a class="contactValue" href="mailto:{{ email }}">{{ email }}</a>
+              </span>
+            </li>
+          {% endif %}
+          {% if hoursText %}
+            <li class="contactItem">
+              <span class="contactIconWrap" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+              <span class="contactText">
+                <span class="contactLabel">Service Area</span>
+                <span class="contactValue">{{ hoursText }}</span>
+              </span>
+            </li>
+          {% endif %}
+        </ul>
+        {% if phone %}
+          <div class="preferToCall2">
+            {# <p class="preferToCall-heading">Prefer to Call?</p> #}
+            {% if preferToCallSubtext %}
+              <p class="preferToCall-subtext">{{ preferToCallSubtext }}</p>
+            {% endif %}
+            <a class="preferToCall-btn" href="tel:{{ phone|replace({' ': '', '-': ''}) }}">
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              Call Now
+            </a>
+          </div>
+        {% endif %}
+        {% if licenseNumbers %}
+          <div class="licenses">{{ licenseNumbers|nl2br }}</div>
+        {% endif %}
+      </div>
+
+      {# Column 2: Contact Form #}
+      {% if formShortcode %}
+        <div class="col col2">
+          {{ function('do_shortcode', formShortcode) }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</flynt-component>

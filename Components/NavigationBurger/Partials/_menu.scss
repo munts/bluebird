@@ -1,0 +1,119 @@
+.menu {
+  backface-visibility: hidden;
+  background-color: var(--color-background);
+  block-size: calc(100% - var(--navigation-height));
+  inline-size: 100%;
+  inset-block-start: var(--navigation-height);
+  inset-inline-start: 0;
+  list-style: none;
+  margin: 0;
+  overflow-y: auto;
+  padding-block: 1rem;
+  padding-inline: 0;
+  position: fixed;
+  transition: translate 0.45s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.45s;
+  translate: 100% 0;
+  visibility: hidden;
+  will-change: translate, visibility;
+  z-index: 98;
+
+  .admin-bar & {
+    block-size: calc(100% - var(--navigation-height) - var(--wp-admin--admin-bar--height));
+    inset-block-start: calc(var(--navigation-height) + var(--wp-admin--admin-bar--height));
+  }
+
+  .item {
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .item-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .link {
+    color: var(--color-text);
+    display: block;
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-block: 1rem;
+    padding-inline: var(--container-spacing);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .current-menu-item > .item-header > .link,
+  .current-menu-item > .link {
+    color: var(--color-accent);
+  }
+
+  .submenu-toggle {
+    background: none;
+    border: 0;
+    color: var(--color-text);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    padding-block: 1rem;
+    padding-inline: var(--container-spacing);
+    transition: color 0.2s ease-in-out;
+
+    i {
+      display: block;
+      transition: rotate 0.25s ease-in-out;
+    }
+
+    &[aria-expanded='true'] {
+      color: var(--color-accent);
+
+      i {
+        rotate: 180deg;
+      }
+    }
+  }
+
+  .submenu {
+    background-color: hsl(0, 0%, 97%);
+    block-size: 0;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding-inline: 0;
+    transition: block-size 0.3s ease-in-out;
+  }
+
+  .submenu-item {
+    border-block-start: 1px solid var(--color-border);
+
+    &.current-menu-item .submenu-link {
+      color: var(--color-accent);
+    }
+  }
+
+  .submenu-link {
+    color: var(--color-text);
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-block: 0.85rem;
+    padding-inline-end: var(--container-spacing);
+    padding-inline-start: calc(var(--container-spacing) + 1rem);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+&[data-status='menuIsOpen'] {
+  .menu {
+    translate: 0 0;
+    visibility: visible;
+  }
+}

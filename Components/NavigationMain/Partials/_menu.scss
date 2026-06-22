@@ -1,0 +1,107 @@
+.menu {
+  align-items: stretch;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding-inline: 0.5rem;
+  position: relative;
+  z-index: 1;
+
+  .item {
+    align-items: center;
+    display: flex;
+    position: relative;
+
+    &::after {
+      background-color: var(--color-accent);
+      block-size: 10px;
+      content: '';
+      inset-block-end: 0;
+      inset-inline: 0;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    &:hover::after,
+    &.current-menu-item::after {
+      opacity: 1;
+    }
+  }
+
+  .link {
+    color: var(--color-text);
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-block: 0.5rem;
+    padding-inline: 0.75rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+    will-change: color;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  .current-menu-item {
+    .link {
+      color: var(--color-accent);
+    }
+  }
+
+  .has-children {
+    &:hover .submenu,
+    &:focus-within .submenu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+
+  .submenu {
+    background-color: var(--color-background);
+    border-block-start: 3px solid var(--color-accent);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.12);
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    list-style: none;
+    min-inline-size: 200px;
+    opacity: 0;
+    padding-block: 0.5rem;
+    padding-inline: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 10;
+  }
+
+  .submenu-item {
+    display: block;
+
+    &.current-menu-item .submenu-link {
+      color: var(--color-accent);
+    }
+  }
+
+  .submenu-link {
+    color: var(--color-text);
+    display: block;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-block: 0.6rem;
+    padding-inline: 1.25rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}

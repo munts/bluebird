@@ -1,0 +1,166 @@
+flynt-component[name='BlockServicesGrid'] {
+  .preContent {
+    margin-block-end: var(--column-gap);
+  }
+
+  .grid {
+    display: grid;
+    gap: clamp(1.25rem, 1.25vw + 0.875rem, 1.875rem);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .item {
+    &-inner {
+      align-items: center;
+      background-color: hsl(0, 0%, 27%);
+      block-size: 100%;
+      border-radius: 8px;
+      color: hsla(0, 0%, 100%, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-block-size: 280px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+
+      p {
+        margin-block-start: 0;
+      }
+
+      &:hover {
+        .icon--fa {
+          opacity: 0.8;
+        }
+
+        .title {
+          text-decoration: underline;
+          text-underline-offset: 0.3ex;
+        }
+      }
+    }
+  }
+
+  .icon {
+    align-items: center;
+    align-self: center;
+    background-color: #ccc;
+    block-size: 3.5rem;
+    border-radius: 50%;
+    display: flex;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    inline-size: 3.5rem;
+    justify-content: center;
+    line-height: 1;
+
+    &--img img {
+      block-size: 1.5rem;
+      inline-size: auto;
+      max-inline-size: 1.5rem;
+      object-fit: contain;
+    }
+  }
+
+  .title {
+    color: hsla(0, 0%, 100%, 1);
+    font-family: var(--font-family-title);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .description {
+    color: hsla(0, 0%, 100%, 0.75);
+    font-size: var(--font-size-body-small);
+    margin: 0;
+  }
+
+  .bullet-list {
+    align-self: stretch;
+    font-size: var(--font-size-body-small);
+    list-style: none;
+    margin-block-start: 0.5rem;
+    padding-inline-start: 0;
+    text-align: start;
+  }
+
+  .bullet-item {
+    color: hsla(0, 0%, 100%, 0.85);
+    padding-block: 0.2rem;
+    padding-inline-start: 1rem;
+    position: relative;
+
+    &::before {
+      color: hsla(0, 0%, 100%, 1);
+      content: '•';
+      inset-block-start: 0.2rem;
+      inset-inline-start: 0;
+      position: absolute;
+    }
+  }
+
+  // Dark section background when a theme is applied
+  &[data-theme='dark'] {
+    background-color: hsl(0, 0%, 15%);
+  }
+
+  // SVG pattern background (gray + white diagonal pattern)
+  &[data-theme='svg'] {
+    background-color: #e8e8e8;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyAgZmlsbD0iI2ZmZmZmZiIgdmlld0JveD0iMCAwIDE5MjAgMTQ0MCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODU2LjA4LDcyMCw1NjUuNywxNDQwSDBWMEg1NjUuN1pNMTAwNi4xNCwwSDgxNi4ybDI5MC4zOCw3MjAtMS41MSwzLjc0TDgxNi4yLDE0NDBoMTg5Ljk0bDI5MC4zOS03MjBaTTExOTAuNywwSDEwODEuNjJMMTM3Miw3MjBsLTI5MC4zOSw3MjBIMTE5MC43bDI5MC4zOC03MjBaTTc5NC42MywwSDU2OC4yTDg1OC41OCw3MjBsLS4xNy40M0w1NjguMiwxNDQwSDc5NC42M0wxMDg1LDcyMFptNjEwLjc5LDBIMTM3NGwyOTAuMzksNzIwTDEzNzQsMTQ0MGgzMS40MmwyOTAuMzktNzIwWiIvPjwvc3ZnPg==");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .item-inner {
+      background-color: hsl(0, 0%, 27%);
+    }
+  }
+
+  // Icon color variants — applied to Font Awesome icons via color
+  &[data-icon-color='red'] .icon--fa {
+    color: var(--color-accent);
+  }
+
+  &[data-icon-color='black'] .icon--fa {
+    color: hsla(0, 0%, 0%, 1);
+  }
+
+  &[data-icon-color='white'] .icon--fa {
+    color: hsla(0, 0%, 100%, 1);
+  }
+}
+
+h2 {
+  color: var(--pphc-dark-red);
+  margin-block-start: 0;
+  text-transform: uppercase;
+}
+
+h3 {
+  color: var(--pphc-red);
+  margin-block-start: 15px;
+  text-transform: uppercase;
+}
+
+h4 {
+  color: var(--pphc-red);
+  font-size: 1.5rem;
+  margin-block-start: 15px;
+  text-transform: uppercase;
+}

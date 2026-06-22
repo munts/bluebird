@@ -1,0 +1,68 @@
+<flynt-component name="BlockLocationInfo" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container">
+    {% if introHtml %}
+      <div class="intro" data-size="wide" data-align="center" data-text-align="center">
+        {{ introHtml|e('wp_kses_post') }}
+      </div>
+    {% endif %}
+
+    <div class="columns">
+      <div class="col-map">
+        {% if mapEmbedUrl %}
+          <iframe
+            class="map-iframe"
+            src="{{ mapEmbedUrl|e('esc_url') }}"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="{{ __('Location Map', 'flynt') }}">
+          </iframe>
+        {% endif %}
+      </div>
+
+      <div class="col-info">
+        {% if infoHeading %}
+          <h3 class="info-heading">{{ infoHeading|e }}</h3>
+        {% endif %}
+
+        {% if addressHtml %}
+          <div class="info-section">
+            <span class="info-label">{{ __('Address', 'flynt') }}</span>
+            <div class="info-content">
+              {{ addressHtml|e('wp_kses_post') }}
+              {% if directionsUrl %}
+                <a class="directions-link" href="{{ directionsUrl|e('esc_url') }}" target="_blank" rel="noopener noreferrer">
+                  {{ __('Get Directions', 'flynt') }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if hoursHtml %}
+          <div class="info-section">
+            <span class="info-label">{{ __('Hours', 'flynt') }}</span>
+            <div class="info-content">
+              {{ hoursHtml|e('wp_kses_post') }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if contactHtml %}
+          <div class="info-section">
+            <span class="info-label">{{ __('Phone', 'flynt') }}</span>
+            <div class="info-content">
+              {{ contactHtml|e('wp_kses_post') }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if cta.url %}
+          <a class="cta-btn" href="{{ cta.url|e('esc_url') }}"{{ cta.target ? ' target="' ~ cta.target ~ '" rel="noopener noreferrer"' }}>
+            {{ cta.title|e }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</flynt-component>

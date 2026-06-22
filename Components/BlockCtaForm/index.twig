@@ -1,0 +1,69 @@
+<flynt-component name="BlockCtaForm" class="{{ options.halfSpacing ? 'componentSpacingHalf' : 'componentSpacing' }}"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }}{{ backgroundImage ? ' data-has-bg-image="true"' }}>
+
+  {% if backgroundImage %}
+    <div class="bg-image" aria-hidden="true">
+      <img
+        src="{{ backgroundImage.src|resizeDynamic(1920) }}"
+        srcset="
+          {{ backgroundImage.src|resizeDynamic(1920) }} 1920w,
+          {{ backgroundImage.src|resizeDynamic(1440) }} 1440w,
+          {{ backgroundImage.src|resizeDynamic(1024) }} 1024w,
+          {{ backgroundImage.src|resizeDynamic(768) }} 768w"
+        sizes="100vw"
+        alt=""
+        loading="lazy">
+    </div>
+    {% if options.overlayColor and options.overlayColor != 'none' %}
+      <div
+        class="overlay"
+        style="--overlay-bg: {{ options.overlayColor == 'navy' ? 'var(--bb-color-primary)' : 'hsl(0, 0%, 0%)' }}; --overlay-opacity: {{ options.overlayOpacity / 100 }};"
+        aria-hidden="true">
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <div class="container">
+    <div class="layout">
+
+      <div class="col-cta">
+        {% if eyebrow %}
+          <p class="eyebrow">{{ eyebrow|e }}</p>
+        {% endif %}
+        {% if contentHtml %}
+          <div class="wysiwyg">{{ contentHtml|e('wp_kses_post') }}</div>
+        {% endif %}
+        {% if subheading %}
+          <div class="subheading">{{ subheading|e('wp_kses_post') }}</div>
+        {% endif %}
+        {% if buttons %}
+          <div class="actions">
+            {% for button in buttons %}
+              {% if button.label and button.url %}
+                <a
+                  class="btn btn--{{ button.style|e }}"
+                  href="{{ button.url|e }}"
+                  {% if button.newWindow %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                  {{ button.label|e }}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if promoHtml %}
+          <div class="promo-content">{{ promoHtml|e('wp_kses_post') }}</div>
+        {% endif %}
+      </div>
+
+      <div class="col-form">
+        {% if formTitle %}
+          <p class="form-title">{{ formTitle|e }}</p>
+        {% endif %}
+        {% if formShortcode %}
+          {{ fn('do_shortcode', formShortcode) }}
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+</flynt-component>

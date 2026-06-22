@@ -1,0 +1,32 @@
+<flynt-component name="BlockServices" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}{{ options.iconColor ? ' data-icon-color="' ~ options.iconColor ~ '"' }}{{ options.roundedCards ? ' data-rounded-cards' : '' }}>
+  <div class="container">
+    {% if preContentHtml %}
+      <div class="preContent" data-align="center" data-text-align="center">
+        {{ preContentHtml|e('wp_kses_post') }}
+      </div>
+    {% endif %}
+    {% if services %}
+      <ul class="grid">
+        {% for service in services %}
+          <li class="item">
+            <div class="item-inner">
+              {% if service.serviceIcon %}
+                <span class="icon icon--fa" aria-hidden="true">
+                  <i class="{{ service.serviceIcon|e }}"></i>
+                </span>
+              {% endif %}
+              {% if service.serviceTitle %}
+                <p class="title">{{ service.serviceTitle|e }}</p>
+              {% endif %}
+              {% if service.serviceDescription %}
+                <div class="description">
+                  {{ service.serviceDescription|e('wp_kses_post') }}
+                </div>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</flynt-component>

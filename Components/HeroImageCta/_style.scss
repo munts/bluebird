@@ -1,0 +1,51 @@
+flynt-component[name='HeroImageCta'] {
+  @import 'mixins';
+  @include align-image('mobile');
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: $breakpoint-tablet) {
+    @include align-image('desktop');
+  }
+
+  .container {
+    --min-block-size: var(--min-block-size-mobile);
+    align-items: flex-end;
+    display: flex;
+    inline-size: 100%;
+    margin-inline: var(--container-spacing);
+    min-block-size: var(--min-block-size);
+    overflow: hidden;
+    padding-inline: 0;
+    position: relative;
+
+    @media (min-width: $breakpoint-tablet) {
+      --min-block-size: var(--min-block-size-desktop);
+    }
+
+    &[data-size='full'] {
+      margin-inline: 0;
+    }
+  }
+
+  .picture {
+    block-size: 100%;
+    inline-size: 100%;
+    inset: 0;
+    position: absolute;
+
+    &-image {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    padding-block-end: 100px;
+    padding-block-start: var(--component-spacing);
+    padding-inline: var(--container-spacing);
+    position: relative;
+  }
+}

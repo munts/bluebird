@@ -1,0 +1,56 @@
+<flynt-component
+  name="BlockPromoCards"
+  class="{{ options.halfSpacing ? 'componentSpacingHalf' : 'componentSpacing' }}">
+
+  <div class="container">
+    <div class="header">
+      {% if eyebrowText %}
+        <p class="eyebrow">{{ eyebrowText }}</p>
+      {% endif %}
+      {% if heading %}
+        <h2 class="heading">{{ heading }}</h2>
+      {% endif %}
+      {% if description %}
+        <p class="description">{{ description }}</p>
+      {% endif %}
+    </div>
+
+    {% if cards %}
+      <div class="grid">
+        {% for card in cards %}
+          <div class="card">
+            {% if card.cardImage %}
+              <div class="card-image-wrap">
+                <img
+                  class="card-image"
+                  src="{{ card.cardImage.src|resizeDynamic(600, 300, 'center') }}"
+                  alt="{{ card.cardImage.alt|e }}"
+                  width="600"
+                  height="300">
+              </div>
+            {% elseif card.cardIcon %}
+              <div class="card-icon-wrap">
+                <i class="{{ card.cardIcon|e }}" aria-hidden="true"></i>
+              </div>
+            {% endif %}
+            {% if card.cardTitle %}
+              <h3 class="card-title">{{ card.cardTitle }}</h3>
+            {% endif %}
+            {% if card.cardText %}
+              <p class="card-text">{{ card.cardText }}</p>
+            {% endif %}
+            {% if card.cardLink %}
+              <a
+                class="card-link"
+                href="{{ card.cardLink.url|e('esc_url') }}"
+                {{ card.cardLink.target ? 'target="' ~ card.cardLink.target ~ '" rel="noopener noreferrer"' }}>
+                {{ card.cardLink.title }} &gt;&gt;
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+</flynt-component>

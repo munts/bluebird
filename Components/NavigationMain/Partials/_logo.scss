@@ -1,0 +1,12 @@
+.logo {
+  display: block;
+  flex-shrink: 0;
+  text-decoration: none;
+
+  &-image {
+    block-size: auto;
+    display: block;
+    inline-size: auto;
+    max-block-size: calc(var(--navigation-height) - 24px);
+  }
+}

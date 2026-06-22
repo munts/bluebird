@@ -1,0 +1,66 @@
+<flynt-component name="BlockMapEmbed" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  {% if contentHtml %}
+    <div class="container centerMaxWidthContainer">
+      <div class="contentWrapper centerContentMaxWidth">
+        <div class="content">
+          {{ contentHtml|e('wp_kses_post') }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div id="myMap" class="acf-map"></div>
+
+  <script>
+    var mapLocations = {{ locationsJson|raw }};
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ apiKey }}&callback=initMap" defer></script>
+  <script>
+    function initMap() {
+      var bounds = new google.maps.LatLngBounds();
+      var map = new google.maps.Map(document.getElementById('myMap'), {
+        zoom: 17,
+        mapTypeId: 'satellite',
+        styles: [
+          { featureType: 'poi.attraction',                                    stylers: [{ visibility: 'on' }] },
+          { featureType: 'poi.business',                                      stylers: [{ visibility: 'off' }] },
+          { featureType: 'poi.government',                                    stylers: [{ visibility: 'on' }] },
+          { featureType: 'poi.medical',                                       stylers: [{ visibility: 'on' }] },
+          { featureType: 'poi.school',                                        stylers: [{ visibility: 'on' }] },
+          { featureType: 'landscape.man_made',                                stylers: [{ visibility: 'on' }] },
+          { featureType: 'landscape.natural', elementType: 'labels',          stylers: [{ visibility: 'on' }] },
+          { featureType: 'landscape.natural', elementType: 'geometry',        stylers: [{ visibility: 'on' }] },
+          { featureType: 'water',             elementType: 'labels',          stylers: [{ visibility: 'on' }] }
+        ]
+      });
+
+      mapLocations.forEach(function (loc) {
+        var position = { lat: loc.lat, lng: loc.lng };
+        bounds.extend(position);
+
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: loc.title
+        });
+
+        if (loc.title || loc.info) {
+          var infowindow = new google.maps.InfoWindow({
+            content: '<div style="font-weight:bold;font-size:16px;padding:10px 10px 4px;">' + loc.title + '</div>' +
+                     '<div style="font-size:14px;padding:0 10px 10px;">' + loc.info + '</div>'
+          });
+          marker.addListener('click', function () {
+            infowindow.open(map, marker);
+          });
+        }
+      });
+
+      if (mapLocations.length === 1) {
+        map.setCenter({ lat: mapLocations[0].lat, lng: mapLocations[0].lng });
+        map.setZoom(17);
+      } else if (mapLocations.length > 1) {
+        map.fitBounds(bounds);
+      }
+    }
+  </script>
+</flynt-component>

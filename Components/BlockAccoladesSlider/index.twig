@@ -1,0 +1,44 @@
+<flynt-component name="BlockAccoladesSlider" load:on="visible" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <script type="application/json">{{ jsonData|json_encode }}</script>
+  <div class="container">
+
+    {% if heading %}
+      <h2 class="heading">{{ heading|e }}</h2>
+    {% endif %}
+
+    {% if accolades %}
+      <div class="slider-wrap">
+
+        <button type="button" data-ref="prev" class="slider-btn slider-btn--prev" aria-label="Previous slide"></button>
+
+        <div data-ref="slider" class="slider swiper">
+          <div class="swiper-wrapper">
+            {% for item in accolades %}
+              <div class="swiper-slide">
+                {% if item.url %}
+                  <a class="accolade" href="{{ item.url|e('esc_url') }}" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="{{ item.image.src }}"
+                      alt="{{ item.image.alt|e }}"
+                      loading="lazy">
+                  </a>
+                {% else %}
+                  <div class="accolade">
+                    <img
+                      src="{{ item.image.src }}"
+                      alt="{{ item.image.alt|e }}"
+                      loading="lazy">
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button type="button" data-ref="next" class="slider-btn slider-btn--next" aria-label="Next slide"></button>
+
+      </div>
+    {% endif %}
+
+  </div>
+</flynt-component>

@@ -1,0 +1,91 @@
+flynt-component[name='BlockAccoladesSlider'] {
+  .heading {
+    font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+    font-weight: 700;
+    margin-block-end: var(--column-gap);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .slider-wrap {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .slider {
+    flex: 1;
+    overflow: hidden;
+
+    &:not(.swiper-initialized) {
+      .swiper-wrapper .swiper-slide:not(:first-child) {
+        display: none;
+      }
+    }
+  }
+
+  .swiper-slide {
+    inline-size: auto;
+  }
+
+  .accolade {
+    align-items: center;
+    display: flex;
+
+    img {
+      block-size: 150px;
+      inline-size: auto;
+      max-inline-size: 280px;
+      object-fit: contain;
+    }
+  }
+
+  a.accolade {
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus {
+      opacity: 0.7;
+    }
+  }
+
+  .slider-btn {
+    align-items: center;
+    background: none;
+    border: 0;
+    color: var(--bb-color-primary);
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding-block: 0.5rem;
+    padding-inline: 0.25rem;
+
+    &.swiper-button-disabled {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    &--prev::before,
+    &--next::after {
+      block-size: 0.8em;
+      border-block-start: 3px solid currentColor;
+      content: '';
+      display: block;
+      inline-size: 0.8em;
+    }
+
+    &--prev::before {
+      border-inline-start: 3px solid currentColor;
+      margin-inline-start: 0.3em;
+      rotate: -45deg;
+    }
+
+    &--next::after {
+      border-inline-end: 3px solid currentColor;
+      margin-inline-end: 0.3em;
+      rotate: 45deg;
+    }
+  }
+}

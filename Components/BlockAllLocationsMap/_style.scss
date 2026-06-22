@@ -1,0 +1,15 @@
+flynt-component[name='BlockAllLocationsMap'] {
+  .map-wrapper {
+    inline-size: 100%;
+    overflow: hidden;
+  }
+
+  .service-map {
+    block-size: 500px;
+    inline-size: 100%;
+
+    @media (min-width: $breakpoint-tablet) {
+      block-size: 600px;
+    }
+  }
+}

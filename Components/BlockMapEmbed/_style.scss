@@ -1,0 +1,23 @@
+flynt-component[name='BlockMapEmbed'] {
+    .container {
+      text-align: center;
+    }
+  
+    .acf-map {
+      block-size: 500px;
+      border: #ccc solid 1px;
+      inline-size: 100%;
+      margin-block: 20px;
+      margin-inline: 0;
+    }
+  
+    .acf-map img {
+      max-inline-size: inherit !important;
+    }
+  
+    @media (max-width: $breakpoint-tablet - 1) {
+      br {
+        content: '\00a0';
+      }
+    }
+  }

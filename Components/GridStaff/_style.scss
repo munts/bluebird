@@ -1,0 +1,156 @@
+flynt-component[name='GridStaff'] {
+  .grid {
+    --grid-item-width: 180px;
+
+    display: grid;
+    gap: 2.5rem var(--flow-space);
+    grid-template-columns: repeat(auto-fit, min(var(--grid-item-width), 100%));
+    justify-content: center;
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  // Staff card
+  .card {
+    text-align: center;
+  }
+
+  .cardTrigger {
+    align-items: center;
+    background: none;
+    border: 0;
+    color: currentColor;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    gap: 0.4rem;
+    inline-size: 100%;
+    padding: 0;
+
+    &:hover,
+    &:focus-visible {
+      .cardImage {
+        scale: 1.05;
+      }
+
+      .button {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .avatar-wrap {
+    block-size: 140px;
+    border-radius: 50%;
+    inline-size: 140px;
+    margin-block-end: 0.5rem;
+    overflow: hidden;
+  }
+
+  .cardImage {
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+    transition: scale 0.3s ease;
+  }
+
+  .cardName {
+    margin-block: 0;
+  }
+
+  .cardPosition {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-body-small);
+    margin-block: 0;
+  }
+
+  // Modal
+  .modalWrapper {
+    inset-block: 0;
+    inset-inline: 0;
+    overflow-y: auto;
+    padding-block: 2rem;
+    padding-inline: var(--container-spacing);
+    position: fixed;
+    z-index: 9999;
+
+    &:not([hidden]) {
+      align-items: flex-start;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .modalInner {
+    background-color: var(--color-background);
+    border-radius: 8px;
+    box-shadow: 0 8px 40px hsla(0, 0%, 0%, 0.3);
+    inline-size: 100%;
+    max-inline-size: 660px;
+    padding-block: 2.5rem;
+    padding-inline: 2rem;
+    position: relative;
+
+    @media (min-width: $breakpoint-tablet) {
+      padding-inline: 3rem;
+    }
+  }
+
+  .modalClose {
+    align-items: center;
+    background: none;
+    block-size: 2.5rem;
+    border: 0;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    font-size: 2rem;
+    inline-size: 2.5rem;
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    position: absolute;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-text);
+    }
+  }
+
+  .modalPhoto {
+    aspect-ratio: 1;
+    block-size: auto;
+    border-radius: 50%;
+    display: block;
+    inline-size: clamp(100px, 30%, 180px);
+    margin-block-end: 1.5rem;
+    margin-inline: auto;
+    object-fit: cover;
+  }
+
+  .modalName {
+    margin-block-end: 1rem;
+    margin-block-start: 0;
+    text-align: center;
+  }
+
+  .modalContent {
+    color: var(--color-text);
+  }
+
+  // Overlay
+  .modalOverlay {
+    background-color: hsla(0, 0%, 0%, 0.6);
+    inset-block: 0;
+    inset-inline: 0;
+    position: fixed;
+    z-index: 9998;
+
+    &:not([hidden]) {
+      display: block;
+    }
+  }
+}

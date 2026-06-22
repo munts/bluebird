@@ -1,0 +1,80 @@
+<flynt-component name="NavigationFooter">
+
+  {# Top band: logo | phone | social #}
+  <div class="top-band">
+    <div class="container top-container">
+
+      <div class="top-logo">
+        {% if logo %}
+          <a class="logo-link" href="{{ site.link }}" aria-label="{{ site.name }}">
+            <img
+              class="logo-img"
+              src="{{ logo.src|resize(320, 0) }}"
+              alt="{{ logo.alt|e }}"
+              width="{{ logo.width }}"
+              height="{{ logo.height }}"
+              loading="lazy">
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="top-phone">
+        {% if phone %}
+          <a class="phone-link" href="tel:{{ phone|replace({' ': '', '-': '', '(': '', ')': ''}) }}">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            {{ phone }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="top-social">
+        {% if socialLinks %}
+          <ul class="social-list">
+            {% for item in socialLinks %}
+              <li class="social-item">
+                <a
+                  class="social-link"
+                  href="{{ item.url|e('esc_url') }}"
+                  aria-label="{{ item.ariaLabel|e }}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <i class="{{ item.icon }}" aria-hidden="true"></i>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  {# Nav band: full-width menu #}
+  <div class="nav-band">
+    <div class="container nav-container">
+      {% if menu %}
+        <nav aria-label="{{ labels.ariaLabel }}">
+          {% include 'Partials/_menu.twig' with {'items': menu.get_items, 'level': '0', 'maxLevel': maxLevel} only %}
+        </nav>
+      {% endif %}
+    </div>
+  </div>
+
+  {# Bottom bar: privacy policy | copyright #}
+  <div class="bottom-bar">
+    <div class="container bottom-container">
+      {% if privacyPolicy.url %}
+        <a
+          class="privacy-link"
+          href="{{ privacyPolicy.url|e('esc_url') }}"
+          {{ privacyPolicy.target ? 'target="' ~ privacyPolicy.target ~ '" rel="noopener noreferrer"' }}>
+          {{ privacyPolicy.title|default('Privacy Policy')|e }}
+        </a>
+      {% endif %}
+      {% if copyrightText %}
+        <p class="copyright">{{ copyrightText|e }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+</flynt-component>

@@ -1,0 +1,41 @@
+<flynt-component name="BlockPromotionRow" class="componentSpacing"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }} data-icon-color="{{ options.iconColor }}">
+  <div class="container">
+    <ul class="grid" data-count="{{ promos|length }}">
+      {% for promo in promos %}
+        {% set tag = promo.url ? 'a' : 'div' %}
+        <li class="item">
+          <{{ tag }} class="item-inner"
+            {% if promo.url %}
+              href="{{ promo.url|e }}"
+              {% if promo.newWindow %}target="_blank" rel="noopener noreferrer"{% endif %}
+            {% endif %}
+          >
+            {% if promo.iconClass %}
+              <span class="icon icon--fa" aria-hidden="true">
+                <i class="{{ promo.iconClass|e }}"></i>
+              </span>
+            {% elseif promo.iconImage %}
+              <span class="icon icon--img">
+                <img
+                  src="{{ promo.iconImage.src }}"
+                  alt="{{ promo.iconImage.alt|e }}"
+                  loading="lazy"
+                  width="{{ promo.iconImage.width }}"
+                  height="{{ promo.iconImage.height }}"
+                >
+              </span>
+            {% endif %}
+
+            {% if promo.heading %}
+              <p class="heading">{{ promo.heading|e }}</p>
+            {% endif %}
+
+            {% if promo.subtext %}
+              <p class="subtext">{{ promo.subtext|e }}</p>
+            {% endif %}
+          </{{ tag }}>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</flynt-component>

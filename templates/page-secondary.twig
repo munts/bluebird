@@ -1,0 +1,20 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+  <article class="secondaryPage">
+    {% if post.thumbnail %}
+      <div class="secondaryPage-hero">
+        <img
+          class="secondaryPage-hero-image"
+          src="{{ post.thumbnail.src('full') }}"
+          alt="{{ post.thumbnail.alt|e }}"
+          width="{{ post.thumbnail.width }}"
+          height="{{ post.thumbnail.height }}"
+        >
+      </div>
+    {% endif %}
+    <div class="secondaryPage-content">
+      {{ post.content }}
+    </div>
+  </article>
+{% endblock %}

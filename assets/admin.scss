@@ -1,0 +1,7 @@
+// stylelint-disable scss/load-no-partial-leading-underscore, scss/at-import-partial-extension-disallowed-list
+@import '../Components/**/_admin.scss';
+
+// Push flexible content field groups below the ACF "Collapse All Elements" button
+.acf-flexible-content {
+  margin-block-start: 30px;
+}

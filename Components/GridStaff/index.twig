@@ -1,0 +1,77 @@
+{% if posts|length > 0 %}
+<flynt-component name="GridStaff" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container" data-flow="layout">
+
+    {% if preContentHtml %}
+      <div data-size="medium" data-align="center" data-text-align="center">
+        {{ preContentHtml|e('wp_kses_post') }}
+      </div>
+    {% endif %}
+
+    <ul class="grid">
+      {% for post in posts %}
+        <li class="card">
+          <button
+            class="cardTrigger"
+            type="button"
+            data-modal-open="{{ post.ID }}"
+            aria-haspopup="dialog"
+            aria-controls="staff-modal-{{ post.ID }}">
+            {% if post.thumbnail %}
+              <div class="avatar-wrap">
+                <img
+                  class="cardImage"
+                  src="{{ post.thumbnail.src|resizeDynamic(200, 200, 'center') }}"
+                  width="200"
+                  height="200"
+                  alt="{{ post.thumbnail.alt|e ?: post.title|e }}"
+                  loading="lazy">
+              </div>
+            {% endif %}
+            <h2 class="cardName h5">{{ post.title }}</h2>
+            {% if post.staffPosition %}
+              <p class="cardPosition">{{ post.staffPosition }}</p>
+            {% endif %}
+            {# <span class="button button--text">Learn More</span> #}
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+  {# Modals — pre-rendered, toggled by JS #}
+  {% for post in posts %}
+    <div
+      class="modalWrapper"
+      id="staff-modal-{{ post.ID }}"
+      data-modal="{{ post.ID }}"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title-{{ post.ID }}"
+      hidden>
+      <div class="modalInner">
+        <button class="modalClose" type="button" data-modal-close aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {% if post.thumbnail %}
+          <img
+            class="modalPhoto"
+            src="{{ post.thumbnail.src|resizeDynamic(400, 400, 'center') }}"
+            width="400"
+            height="400"
+            alt="{{ post.thumbnail.alt|e ?: post.title|e }}"
+            loading="lazy">
+        {% endif %}
+        <h2 class="modalName" id="modal-title-{{ post.ID }}">{{ post.title }}</h2>
+        {% if post.content %}
+          <div class="modalContent">{{ post.content }}</div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="modalOverlay" data-modal-overlay hidden></div>
+
+</flynt-component>
+{% endif %}

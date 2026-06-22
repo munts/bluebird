@@ -1,0 +1,25 @@
+flynt-component[name='BlockShortcode'] {
+  &[data-bg='black'],
+  &[data-bg='white'] {
+    margin-block: 0;
+    padding-block: var(--component-spacing);
+  }
+
+  &[data-bg='black'] {
+    background-color: hsla(0, 0%, 0%, 1);
+    color: hsla(0, 0%, 100%, 1);
+  }
+
+  &[data-bg='white'] {
+    background-color: hsla(0, 0%, 100%, 1);
+    color: hsla(0, 0%, 19%, 1);
+  }
+
+  .contentAbove {
+    margin-block-end: var(--flow-space);
+  }
+
+  .contentBelow {
+    margin-block-start: var(--flow-space);
+  }
+}

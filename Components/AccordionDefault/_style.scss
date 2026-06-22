@@ -1,0 +1,71 @@
+flynt-component[name='AccordionDefault'] {
+  .items {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .item {
+    display: block;
+    padding-block-end: var(--flow-space);
+
+    &:not(:first-child) {
+      padding-block-start: var(--flow-space);
+    }
+
+    + .item {
+      border-block-start: 2px solid var(--color-border);
+    }
+  }
+
+  .trigger {
+    --icon-size: 10px;
+    color: hsla(0, 0%, 0%, 1);
+    cursor: pointer;
+    font-family: var(--font-family-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    inline-size: 100%;
+    letter-spacing: 0.04em;
+    margin: 0;
+    padding-inline-end: calc(var(--icon-size) + 1.5ch);
+    position: relative;
+    text-align: start;
+    text-transform: uppercase;
+
+    &::after {
+      block-size: var(--icon-size);
+      border-block-end: 2px solid var(--color-accent);
+      border-inline-end: 2px solid var(--color-accent);
+      content: '';
+      inline-size: var(--icon-size);
+      inset-block-start: calc(50% - var(--icon-size) * 0.75);
+      inset-inline-end: 2px;
+      position: absolute;
+      rotate: 45deg;
+      transition: rotate 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      will-change: rotate;
+    }
+  }
+
+  // Do not add margins or padding to this, it will may break the layout.
+  .content {
+    display: none;
+    margin: 0;
+    padding: 0;
+
+    &-inner {
+      margin-block-start: var(--flow-space);
+    }
+  }
+
+  [aria-expanded=true] {
+    &::after {
+      inset-block-start: calc(50% - var(--icon-size) * 0.25);
+      rotate: -135deg;
+    }
+  }
+
+  [aria-hidden=false] {
+    display: block;
+  }
+}

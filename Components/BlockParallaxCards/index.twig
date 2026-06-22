@@ -1,0 +1,64 @@
+<flynt-component name="BlockParallaxCards" load:on="visible">
+  <div class="container">
+
+    {% if eyebrowText or headline %}
+      <div class="header">
+        {% if eyebrowText %}
+          <p class="eyebrow">{{ eyebrowText }}</p>
+        {% endif %}
+        {% if headline %}
+          <h2 class="headline">{{ headline }}</h2>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if cards %}
+      <ul class="cards">
+        {% for card in cards %}
+          <li class="card">
+            {% if card.cardImage %}
+              <img
+                class="cardImage lazyload"
+                src="{{ card.cardImage.src|resizeDynamic(800) }}"
+                srcset="{{ placeholderImage(800, 500, 'rgba(125, 125, 125, 0.1)') }}"
+                data-srcset="
+                  {{ card.cardImage.src|resizeDynamic(800) }} 800w,
+                  {{ card.cardImage.src|resizeDynamic(600) }} 600w,
+                  {{ card.cardImage.src|resizeDynamic(400) }} 400w"
+                data-sizes="auto"
+                width="800"
+                height="500"
+                alt="{{ card.cardImage.alt|e }}"
+                loading="lazy">
+            {% endif %}
+            <div class="cardBody">
+              {% if card.cardTitle %}
+                <h3 class="cardTitle">{{ card.cardTitle|e }}</h3>
+              {% endif %}
+              {% if card.cardText %}
+                <p class="cardText">{{ card.cardText|e }}</p>
+              {% endif %}
+              {% if card.cardUrl %}
+                <a class="cardBtn" href="{{ card.cardUrl|e }}">
+                  {{ card.cardBtnLabel ? card.cardBtnLabel|e : 'Learn More' }}
+                </a>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if ctaLink %}
+      <div class="ctaWrap">
+        <a
+          class="ctaButton"
+          href="{{ ctaLink.url }}"
+          {% if ctaLink.target %}target="{{ ctaLink.target }}" rel="noopener"{% endif %}>
+          {{ ctaLink.title }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</flynt-component>

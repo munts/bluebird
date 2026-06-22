@@ -1,0 +1,261 @@
+flynt-component[name='FooterColumns'] {
+  background-color: var(--color-background);
+  border-block-start: 1px solid var(--color-border);
+  padding-block: var(--component-spacing);
+  position: relative;
+  z-index: 1;
+
+  .header {
+    margin-block-end: 3rem;
+    text-align: center;
+  }
+
+  .header-eyebrow {
+    color: var(--color-accent-headline);
+    font-family: 'Oswald', 'Trebuchet MS', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-block: 0;
+    text-transform: uppercase;
+  }
+
+  .header-heading {
+    color: hsla(0, 0%, 100%, 1);
+    font-family: 'Oswald', 'Trebuchet MS', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-block: 0.5rem 0;
+    text-transform: uppercase;
+  }
+
+  .grid {
+    align-items: start;
+    display: grid;
+    gap: var(--column-gap);
+    grid-template-columns: 1fr;
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Column 1: Contact Info
+  .col1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .col1-intro {
+    color: hsla(0, 0%, 100%, 1);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .col1-subtext {
+    color: hsla(0, 0%, 100%, 0.75);
+    margin: 0;
+  }
+
+  .contactList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .contactItem {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .contactIconWrap {
+    align-items: center;
+    background-color: #ccc;
+    block-size: 2.75rem;
+    border-radius: 50%;
+    color: var(--color-accent);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 1rem;
+    inline-size: 2.75rem;
+    justify-content: center;
+  }
+
+  .contactText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .contactLabel {
+    color: hsla(0, 0%, 100%, 0.65);
+    font-size: var(--font-size-body-small);
+  }
+
+  .contactValue {
+    color: hsla(0, 0%, 100%, 1);
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+  }
+
+  .preferToCall {
+    background-color: hsl(343, 70%, 22%);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-block: 1.25rem;
+    padding-inline: 1.25rem;
+  }
+
+  .preferToCall-heading {
+    color: hsla(0, 0%, 100%, 1);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .preferToCall-subtext {
+    color: hsla(0, 0%, 100%, 0.75);
+    font-size: var(--font-size-body-small);
+    margin: 0;
+  }
+
+  .preferToCall-btn {
+    align-items: center;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+    color: hsla(0, 0%, 100%, 1);
+    display: flex;
+    font-size: var(--font-size-body-small);
+    font-weight: 700;
+    gap: 0.5rem;
+    justify-content: center;
+    letter-spacing: 0.06em;
+    margin-block-start: 0.5rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus {
+      opacity: 0.85;
+    }
+  }
+
+  .licenses {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-body-small);
+  }
+
+  // Column 2: Contact Form
+  .col2 {
+    background-color: hsl(0, 0%, 18%);
+    border-radius: 6px;
+    padding-block: 1.5rem;
+    padding-inline: 1.5rem;
+
+    // Gravity Forms dark theme overrides
+    .gform_wrapper {
+      margin: 0;
+    }
+
+    .gfield_label {
+      color: hsla(0, 0%, 100%, 0.9);
+      font-size: var(--font-size-body-small);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-block-end: 0.35rem;
+    }
+
+    .gfield_required {
+      color: var(--color-accent);
+    }
+
+    .ginput_container input,
+    .ginput_container textarea,
+    .ginput_container select {
+      background-color: hsl(0, 0%, 12%);
+      border: 1px solid hsl(0, 0%, 32%);
+      border-radius: 4px;
+      color: hsla(0, 0%, 100%, 1);
+      font-size: var(--font-size-body-small);
+      inline-size: 100%;
+      padding-block: 0.65rem;
+      padding-inline: 0.875rem;
+
+      &::placeholder {
+        color: hsla(0, 0%, 100%, 0.3);
+      }
+
+      &:focus {
+        border-color: var(--color-accent);
+        outline: none;
+      }
+    }
+
+    .ginput_container textarea {
+      block-size: 120px;
+      resize: vertical;
+    }
+
+    .ginput_container select {
+      appearance: auto;
+    }
+
+    .gfield {
+      margin-block-end: 0.75rem;
+    }
+
+    .gfield_validation_message,
+    .validation_message {
+      color: hsl(0, 70%, 60%);
+      font-size: var(--font-size-body-small);
+      margin-block-start: 0.25rem;
+    }
+
+    .gform_footer,
+    .gform_page_footer {
+      margin-block-start: 1rem;
+      padding: 0;
+    }
+
+    .gform_button {
+      background-color: var(--color-accent) !important;
+      block-size: auto !important;
+      border: 0 !important;
+      border-radius: 8px !important;
+      color: hsla(0, 0%, 100%, 1) !important;
+      cursor: pointer;
+      display: block !important;
+      font-size: var(--font-size-body-small) !important;
+      font-weight: 700 !important;
+      inline-size: 90% !important;
+      letter-spacing: 0.08em;
+      margin-inline: auto !important;
+      padding-block: 1rem !important;
+      padding-inline: 1.5rem !important;
+      text-transform: uppercase !important;
+      transition: opacity 0.2s ease;
+
+      &:hover,
+      &:focus {
+        opacity: 0.85;
+      }
+    }
+  }
+}

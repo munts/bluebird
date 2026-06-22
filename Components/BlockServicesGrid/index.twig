@@ -1,0 +1,53 @@
+{% if schemaJson %}
+<script type="application/ld+json">{{ schemaJson|raw }}</script>
+{% endif %}
+{% if services|length > 0 %}
+<flynt-component name="BlockServicesGrid" class="componentSpacing"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }} data-icon-color="{{ options.iconColor }}">
+  <div class="container">
+    {% if preContentHtml %}
+      <div class="preContent" data-align="center" data-text-align="center">
+        {{ preContentHtml|e('wp_kses_post') }}
+      </div>
+    {% endif %}
+    <ul class="grid">
+      {% for service in services %}
+        <li class="item">
+          <a
+            class="item-inner"
+            href="{{ service.link|e }}"
+          >
+            {% if service.iconClass %}
+              <span class="icon icon--fa" aria-hidden="true">
+                <i class="{{ service.iconClass|e }}"></i>
+              </span>
+            {% elseif service.iconImage %}
+              <span class="icon icon--img">
+                <img
+                  src="{{ service.iconImage.src }}"
+                  alt="{{ service.iconImage.alt|e }}"
+                  loading="lazy"
+                  width="{{ service.iconImage.width }}"
+                  height="{{ service.iconImage.height }}"
+                >
+              </span>
+            {% endif %}
+            {% if service.title %}
+              <p class="title">{{ service.title|e }}</p>
+            {% endif %}
+            {% if service.oneLiner %}
+              <p class="description">{{ service.oneLiner|e }}</p>
+            {% endif %}
+            {% if service.bullets|length > 0 %}
+              <ul class="bullet-list">
+                {% for bullet in service.bullets %}
+                  <li class="bullet-item">{{ bullet.bulletText|e }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</flynt-component>
+{% endif %}

@@ -1,0 +1,35 @@
+<flynt-component
+  name="BlockTestimonials"
+  class="{{ options.halfSpacing ? 'componentSpacingHalf' : 'componentSpacing' }}">
+
+  <div class="container">
+    <div class="header">
+      <span class="quote-icon" aria-hidden="true"><i class="fa-solid fa-quote-left"></i></span>
+      {% if heading %}
+        <h2 class="heading">{{ heading }}</h2>
+      {% endif %}
+    </div>
+
+    {% if testimonials %}
+      <div class="grid">
+        {% for item in testimonials %}
+          <div class="testimonial">
+            {% if item.avatar %}
+              <div class="avatar-wrap">
+                <img
+                  class="avatar"
+                  src="{{ item.avatar.src|resizeDynamic(100, 100, 'center') }}"
+                  alt="{{ item.avatar.alt|e }}"
+                  width="100"
+                  height="100">
+              </div>
+            {% endif %}
+            <blockquote class="quote">{{ item.quote }}</blockquote>
+            <cite class="name">{{ item.reviewerName }}</cite>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+</flynt-component>

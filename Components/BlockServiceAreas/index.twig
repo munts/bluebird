@@ -1,0 +1,35 @@
+<flynt-component name="BlockServiceAreas" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}{{ options.iconColor ? ' data-icon-color="' ~ options.iconColor ~ '"' }}>
+  <div class="container">
+    <div class="card">
+      {% if cardIcon %}
+        <span class="icon icon--fa" aria-hidden="true">
+          <i class="{{ cardIcon|e }}"></i>
+        </span>
+      {% endif %}
+
+      {% if cardTitle %}
+        <p class="title">{{ cardTitle|e }}</p>
+      {% endif %}
+
+      {% if areas %}
+        <div class="areas">
+          {% for area in areas %}
+            <div class="area">
+              <p class="area-name">{{ area.areaName|e }}</p>
+              {% if area.areaCities %}
+                <ul>
+                  {% for line in area.areaCities|split('\n') %}
+                    {% set city = line|trim %}
+                    {% if city %}
+                      <li>{{ city|e }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</flynt-component>

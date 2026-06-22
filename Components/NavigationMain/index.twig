@@ -1,0 +1,57 @@
+<flynt-component load:on="idle" load:on:media="(min-width: 1024px)" name="NavigationMain">
+
+  {# Top utility bar: phone + CTA, dark navy with diagonal left edge #}
+  <div class="utility-bar">
+    <div class="utility-inner">
+      {% if utilityBar.phone %}
+        <a class="utility-phone" href="tel:{{ utilityBar.phone }}">
+          <span class="utility-icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+          <span>{{ utilityBar.phone }}</span>
+        </a>
+      {% endif %}
+      {% if utilityBar.ctaFreeEstimateLabel %}
+        <a class="utility-cta" href="#footer-estimate" data-ref="estimateTrigger">{{ utilityBar.ctaFreeEstimateLabel }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if utilityBar.freeEstimateFormId %}
+    <div class="modal" data-ref="estimateModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="estimateModalTitle">
+      <div class="modal-overlay" data-ref="modalOverlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" data-ref="modalClose" type="button" aria-label="Close modal">&times;</button>
+        <h2 class="modal-title" id="estimateModalTitle">{{ utilityBar.ctaFreeEstimateLabel }}</h2>
+        {{ fn('do_shortcode', '[gravityform id="' ~ utilityBar.freeEstimateFormId ~ '" title="false" ajax="true"]') }}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Main nav row: logo left, primary menu right #}
+  <nav class="navigation" aria-label="{{ labels.ariaLabel|e }}">
+    <div class="container">
+      {% include 'Partials/_logo.twig' with {'logo': logo, 'site': site} only %}
+      {% if menu %}
+        <div class="menu-band">
+          {% include 'Partials/_menu.twig' with {'items': menu.items} only %}
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+
+  {# Product bar: service category links #}
+  {% if productNav %}
+    <nav class="product-bar" aria-label="Product Categories">
+      {% for item in productNav %}
+        <a class="product-bar-item" href="{{ item.url|e('esc_url') }}">
+          {% if item.icon %}
+            <span class="product-bar-icon">
+              <img src="{{ item.icon.url }}" alt="{{ item.icon.alt }}" width="{{ item.icon.width }}" height="{{ item.icon.height }}">
+            </span>
+          {% endif %}
+          <span class="product-bar-label">{{ item.label }}</span>
+        </a>
+      {% endfor %}
+    </nav>
+  {% endif %}
+
+</flynt-component>

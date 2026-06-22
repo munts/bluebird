@@ -1,0 +1,144 @@
+:root,
+[data-theme="reset"] {
+  --color-accent: hsla(212, 100%, 45%, 1);
+  --color-background: hsla(0, 0%, 100%, 1);
+  --color-background-secondary: hsla(0, 0%, 19%, 0.08);
+  --color-border: hsl(0, 0%, 90%);
+  --color-border-secondary: hsl(0, 0%, 19%, 0.68);
+  --color-text: hsl(0, 0%, 19%, 1);
+  --color-text-muted: hsla(0, 0%, 19%, 0.8);
+  --color-error: hsl(343, 98%, 46%);
+}
+
+[data-theme="light"] {
+  --color-background: hsl(0, 0%, 94.5%);
+  --color-text: hsla(212, 100%, 15%, 1);
+  --color-border: hsla(212, 100%, 15%, 0.7);
+  --color-border-secondary: var(--color-border);
+}
+
+[data-theme="dark"] {
+  --color-accent: hsla(79, 100%, 60%, 1);
+  --color-background: var(--bb-blue-900);
+  --color-background-secondary: hsl(228, 56%, 98%, 0.06);
+  --color-border-secondary: hsl(0, 0%, 90%, 0.68);
+  --color-text: hsla(0, 0%, 100%, 1);
+  --color-text-muted: hsl(0, 0%, 100%, 0.8);
+}
+
+// =============================================================================
+// BlueBird Custom Variables
+// =============================================================================
+
+// --- Primitive color tokens --------------------------------------------------
+:root {
+  // Blues
+  --bb-blue-900: hsla(197, 100%, 16%, 1);
+  --bb-blue-500: hsla(196, 51%, 39%, 1);
+  --bb-blue-300: hsla(197, 48%, 56%, 1);
+
+  // Neutrals
+  --bb-white:     hsla(0, 0%, 100%, 1);
+  --bb-gray-800:  hsla(0, 0%, 19%, 1);
+  --bb-gray-100:  hsla(0, 0%, 90%, 1);
+
+  // Error
+  --bb-red-500:   hsla(343, 98%, 46%, 1);
+}
+
+// --- Semantic color tokens ---------------------------------------------------
+:root {
+  --bb-color-primary:               var(--bb-blue-900);
+  --bb-color-secondary:             var(--bb-blue-500);
+  --bb-color-tertiary:              var(--bb-blue-300);
+
+  --bb-color-background:            var(--bb-white);
+  --bb-color-background-secondary:  hsla(0, 0%, 19%, 0.08);
+  --bb-color-border:                var(--bb-gray-100);
+  --bb-color-border-secondary:      hsla(0, 0%, 19%, 0.68);
+  --bb-color-text:                  var(--bb-gray-800);
+  --bb-color-text-muted:            hsla(0, 0%, 19%, 0.8);
+  --bb-color-error:                 var(--bb-red-500);
+}
+
+// --- Semantic typography tokens ----------------------------------------------
+:root {
+  --bb-font-family-heading:   'Public Sans', 'Trebuchet MS', sans-serif;
+  --bb-font-family-text:      'Public Sans', 'Trebuchet MS', sans-serif;
+  --bb-font-size-body:        1.125rem;
+  --bb-font-size-body-small:  1rem;
+}
+
+// --- Header height token (utility 44 + nav 80 + product-bar 56) -------------
+:root {
+  --bb-header-height: 180px;
+}
+
+// --- Semantic spacing tokens -------------------------------------------------
+:root {
+  --bb-flow-space:          1.5625rem;
+  --bb-column-gap:          clamp(2.5rem, 2.5vw + 1.75rem, 3.75rem);
+  --bb-content-max-width:   700px;
+  --bb-content-max-width-wide: 900px;
+  --bb-content-max-width-full: 1200px;
+  --bb-box-spacing:         clamp(1rem, 2.50vw + 0.25rem, 2.25rem);
+  --bb-container-spacing:   clamp(1rem, 2.5vw + 0.25rem, 2.25rem);
+  --bb-component-spacing:   clamp(3rem, 6.5vw + 1.05rem, 6.25rem);
+}
+
+// --- Remap base theme vars to BB tokens --------------------------------------
+:root {
+  --color-accent:               var(--bb-color-primary);
+  --color-background:           var(--bb-color-background);
+  --color-background-secondary: var(--bb-color-background-secondary);
+  --color-border:               var(--bb-color-border);
+  --color-border-secondary:     var(--bb-color-border-secondary);
+  --color-text:                 var(--bb-color-text);
+  --color-text-muted:           var(--bb-color-text-muted);
+  --color-error:                var(--bb-color-error);
+
+  --font-family-heading:  var(--bb-font-family-heading);
+  --font-family-text:     var(--bb-font-family-text);
+  --font-size-body:       var(--bb-font-size-body);
+  --font-size-body-small: var(--bb-font-size-body-small);
+
+  --flow-space:           var(--bb-flow-space);
+  --column-gap:           var(--bb-column-gap);
+  --content-max-width:    var(--bb-content-max-width);
+  --content-max-width-wide: var(--bb-content-max-width-wide);
+  --content-max-width-full: var(--bb-content-max-width-full);
+  --box-spacing:          var(--bb-box-spacing);
+  --container-spacing:    var(--bb-container-spacing);
+  --component-spacing:    var(--bb-component-spacing);
+}
+
+// =============================================================================
+// Base Theme Variables (do not edit — override via BB tokens above)
+// =============================================================================
+
+$breakpoint-mobile-horizontal: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-tablet-horizontal: 1024px;
+$breakpoint-desktop: 1280px;
+
+:root {
+  /**
+   * FOUC can be reduced with good matching fallback font.
+   * https://meowni.ca/font-style-matcher/ or
+   * https://github.com/pixel-point/fontpie
+   */
+  --font-family-heading: 'Public Sans', 'Trebuchet MS', sans-serif;
+  --font-family-text: 'Public Sans', 'Trebuchet MS', sans-serif;
+  --font-size-body: 1.125rem;
+  --font-size-body-small: 1rem;
+  --flow-space: 1.5625rem;
+  --column-gap: clamp(2.5rem, 2.5vw + 1.75rem, 3.75rem);
+
+  --content-max-width: 700px;
+  --content-max-width-wide: 900px;
+  --content-max-width-full: 1200px;
+
+  --box-spacing: clamp(1rem, 2.50vw + 0.25rem, 2.25rem);
+  --container-spacing: clamp(1rem, 2.5vw + 0.25rem, 2.25rem);
+  --component-spacing: clamp(3rem, 6.5vw + 1.05rem, 6.25rem);
+}
