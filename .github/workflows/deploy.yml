@@ -1,0 +1,83 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Composer dependencies
+        run: composer install --optimize-autoloader
+
+      - name: Build assets
+        run: npm run build:production
+
+      - name: Install production Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p deploy
+          rsync -a \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='assets/scripts' \
+            --exclude='assets/styles' \
+            --exclude='assets/admin.js' \
+            --exclude='assets/admin.scss' \
+            --exclude='assets/editor-style.scss' \
+            --exclude='assets/main.js' \
+            --exclude='assets/main.scss' \
+            --exclude='assets/print.scss' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='composer.json' \
+            --exclude='composer.lock' \
+            --exclude='*.md' \
+            --exclude='.gitignore' \
+            --exclude='.editorconfig' \
+            --exclude='.scrutinizr.yml' \
+            --exclude='.travis.yml' \
+            --exclude='phpcs.xml.dist' \
+            --exclude='vite.config.js' \
+            --exclude='vite-plugin-flynt.js' \
+            --exclude='deploy' \
+            ./ deploy/
+
+      - name: Install lftp
+        run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lftp
+
+      - name: Deploy to Production via SFTP
+        env:
+          SFTP_USER: ${{ secrets.FLYWHEEL_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.FLYWHEEL_SFTP_PASSWORD }}
+          SFTP_HOST: ${{ secrets.FLYWHEEL_SFTP_HOST }}
+          REMOTE_PATH: ${{ secrets.FLYWHEEL_PROD_REMOTE_PATH }}
+        run: |
+          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror --reverse --only-newer --no-perms --parallel=4 ./deploy/ $REMOTE_PATH; bye"
