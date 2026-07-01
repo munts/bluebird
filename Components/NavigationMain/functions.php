@@ -119,10 +119,10 @@ Options::addTranslatable('NavigationMain', [
                 'wrapper' => ['width' => '34'],
             ],
             [
-                'label' => __('Page', 'flynt'),
-                'instructions' => __('Select the page this item links to.', 'flynt'),
+                'label' => __('URL', 'flynt'),
+                'instructions' => __('Relative path (e.g. /custom-windows/) or full URL.', 'flynt'),
                 'name' => 'url',
-                'type' => 'page_link',
+                'type' => 'text',
                 'wrapper' => ['width' => '33'],
             ],
             [
