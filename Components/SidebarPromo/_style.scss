@@ -1,0 +1,171 @@
+flynt-component[name='SidebarPromo'] {
+  background-color: var(--bb-gray-050);
+  border-radius: 8px;
+  display: block;
+  margin-inline: auto;
+  max-inline-size: 420px;
+  padding: var(--container-spacing);
+
+  // Above tablet-horizontal this sits in the ~320px sticky sidebar column,
+  // which already constrains its width — so the cap above (needed once it
+  // drops to full page width on smaller screens) is no longer necessary.
+  @media (min-width: $breakpoint-tablet-horizontal) {
+    margin-inline: 0;
+    max-inline-size: none;
+  }
+
+  .heading {
+    color: var(--bb-blue-900);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-block: 0 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .intro {
+    color: var(--bb-blue-900);
+    margin-block-end: 1.5rem;
+    text-align: center;
+  }
+
+  .tiers-box {
+    background-color: var(--bb-blue-500);
+    border-radius: 12px;
+    margin-block-start: 1.5rem;
+    padding-block: 1.5rem 1.25rem;
+    padding-inline: 1rem;
+    position: relative;
+  }
+
+  .bird-icon {
+    block-size: 3.5rem;
+    inline-size: auto;
+    inset-block-start: -1.75rem;
+    inset-inline-start: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
+  .eyebrow {
+    color: hsla(0, 0%, 100%, 1);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-block: 0 0.75rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .tiers {
+    align-items: center;
+    column-gap: 0.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    list-style: none;
+    margin-block-end: 0.75rem;
+    padding-inline-start: 0;
+    row-gap: 0.5rem;
+  }
+
+  .tier {
+    display: contents;
+  }
+
+  .tier-number {
+    color: var(--bb-yellow-500);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+
+    &--word {
+      font-size: 1.25rem;
+    }
+  }
+
+  .tier-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-align: start;
+  }
+
+  .tier-unit {
+    color: var(--bb-yellow-500);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .tier-value-row {
+    align-items: baseline;
+    color: var(--bb-blue-100);
+    display: flex;
+  }
+
+  .tier-equals {
+    font-size: 1.75rem;
+    padding-inline-end: 0.2em;
+  }
+
+  .tier-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .tier-off {
+    color: var(--bb-blue-100);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+
+  .footnote {
+    color: hsla(0, 0%, 100%, 0.85);
+    font-size: 0.75rem;
+    margin-block-end: 0;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background-color: var(--bb-blue-300);
+    border-radius: 4px;
+    color: hsla(0, 0%, 100%, 1);
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-block-start: 1.25rem;
+    padding-block: 0.75rem;
+    padding-inline: 1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  .btn-secondary {
+    background-color: var(--bb-blue-300);
+    border-radius: 4px;
+    color: hsla(0, 0%, 100%, 1);
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-block-start: 0.75rem;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}

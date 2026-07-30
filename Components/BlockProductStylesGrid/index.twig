@@ -1,0 +1,41 @@
+{% if items|length > 0 %}
+<flynt-component name="BlockProductStylesGrid">
+  <div class="container">
+    {% if heading or intro %}
+      <div class="preContent">
+        {% if heading %}
+          <h2 class="heading">{{ heading|e }}</h2>
+        {% endif %}
+        {% if intro %}
+          <p class="intro">{{ intro|e }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    <ul class="grid">
+      {% for item in items %}
+        <li class="item">
+          <a class="item-inner" href="{{ item.url|e }}">
+            {% if item.image %}
+              <span class="image">
+                <img
+                  src="{{ item.image.src|resizeDynamic(400, 300, 'center') }}"
+                  alt="{{ item.image.alt|e }}"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                >
+              </span>
+            {% endif %}
+            {% if item.title %}
+              <h3 class="title">{{ item.title|e }}</h3>
+            {% endif %}
+            {% if item.description %}
+              <p class="description">{{ item.description|e }}</p>
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</flynt-component>
+{% endif %}

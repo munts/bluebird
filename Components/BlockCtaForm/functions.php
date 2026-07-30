@@ -34,6 +34,18 @@ function getACFLayout(): array
                 'required' => 0,
             ],
             [
+                'label' => __('Subheading Logo', 'flynt'),
+                'instructions' => __('Optional. Displayed in its own column to the left of the text.', 'flynt'),
+                'name' => 'subheadingLogo',
+                'type' => 'image',
+                'return_format' => 'array',
+                'preview_size' => 'thumbnail',
+                'library' => 'all',
+                'mime_types' => 'svg,png,jpg,jpeg,webp',
+                'required' => 0,
+                'wrapper' => ['width' => '50'],
+            ],
+            [
                 'label' => __('Subheading / Promo Text', 'flynt'),
                 'instructions' => __('Optional. Displayed below the main content — good for limited-time offers or supporting copy.', 'flynt'),
                 'name' => 'subheading',
@@ -41,6 +53,7 @@ function getACFLayout(): array
                 'delay' => 0,
                 'media_upload' => 0,
                 'required' => 0,
+                'wrapper' => ['width' => '50'],
             ],
             [
                 'label' => __('Buttons', 'flynt'),

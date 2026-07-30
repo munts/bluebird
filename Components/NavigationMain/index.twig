@@ -1,4 +1,18 @@
-<flynt-component load:on="idle" load:on:media="(min-width: 1024px)" name="NavigationMain">
+<flynt-component load:on="idle" load:on:media="(min-width: 1024px)" name="NavigationMain"{{ (promoBar.label and promoBar.url) ? ' data-has-promo-bar="true"' }}>
+
+  {# Promo bar: optional, occasional-use announcement (specials, hiring, etc.) — renders nothing when empty #}
+  {% if promoBar.label and promoBar.url %}
+    <div class="promo-bar">
+      <div class="promo-bar-inner">
+        <a
+          class="promo-bar-cta btn btn--{{ promoBar.style|e }}"
+          href="{{ promoBar.url|e }}"
+          {% if promoBar.newWindow %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {{ promoBar.label|e }}
+        </a>
+      </div>
+    </div>
+  {% endif %}
 
   {# Top utility bar: phone + CTA, dark navy with diagonal left edge #}
   <div class="utility-bar">
@@ -38,18 +52,33 @@
     </div>
   </nav>
 
-  {# Product bar: service category links #}
-  {% if productNav %}
+  {# Product bar: Windows / Doors / Siding, each with a dropdown of style pages #}
+  {% if productNav.items %}
     <nav class="product-bar" aria-label="Product Categories">
-      {% for item in productNav %}
-        <a class="product-bar-item" href="{{ item.url|e('esc_url') }}">
-          {% if item.icon %}
-            <span class="product-bar-icon">
-              <img src="{{ item.icon.url }}" alt="{{ item.icon.alt }}" width="{{ item.icon.width }}" height="{{ item.icon.height }}">
-            </span>
+      {% for item in productNav.items %}
+        <div class="product-bar-item {{- item.children ? ' has-children' }}">
+          <a class="product-bar-link" href="{{ item.link|e('esc_url') }}" {{- item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' -}}>
+            {% if item.meta('iconClass') %}
+              <span class="product-bar-icon product-bar-icon--fa" aria-hidden="true">
+                <i class="{{ item.meta('iconClass')|e }}"></i>
+              </span>
+            {% elseif item.meta('iconImage') %}
+              <span class="product-bar-icon product-bar-icon--img">
+                <img src="{{ item.meta('iconImage').src }}" alt="{{ item.meta('iconImage').alt }}" width="{{ item.meta('iconImage').width }}" height="{{ item.meta('iconImage').height }}">
+              </span>
+            {% endif %}
+            <span class="product-bar-label">{{ item.title }}</span>
+          </a>
+          {% if item.children %}
+            <ul class="product-bar-submenu">
+              {% for child in item.children %}
+                <li class="product-bar-submenu-item {{- child.current ? ' current-menu-item' }}">
+                  <a class="product-bar-submenu-link" href="{{ child.link|e('esc_url') }}" {{- child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' -}}>{{ child.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
           {% endif %}
-          <span class="product-bar-label">{{ item.label }}</span>
-        </a>
+        </div>
       {% endfor %}
     </nav>
   {% endif %}

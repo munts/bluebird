@@ -1,4 +1,4 @@
-flynt-component[name='BlockCtaForm'] {
+flynt-component[name='FooterCta'] {
   --heading-color: var(--color-text);
 
   &[data-has-bg-image='true'] {
@@ -105,7 +105,7 @@ flynt-component[name='BlockCtaForm'] {
     // Gravity Form submit button
     .gform_button,
     input[type='submit'] {
-      background-color: hsl(197, 44%, 52%) !important;
+      background-color: var(--bb-blue-300) !important;
       border: 0;
       border-radius: 4px;
       color: hsla(0, 0%, 100%, 1) !important;
@@ -127,7 +127,7 @@ flynt-component[name='BlockCtaForm'] {
   }
 
   .form-title {
-    color: hsl(197, 44%, 52%);
+    color: var(--bb-blue-300);
     font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -237,7 +237,7 @@ flynt-component[name='BlockCtaForm'] {
     &--outline-teal {
       --btn-border-width: 1px;
       background-color: transparent;
-      border-color: hsl(197, 42%, 57%);
+      border-color: var(--bb-blue-300);
       color: hsla(0, 0%, 100%, 1);
     }
   }

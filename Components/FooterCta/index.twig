@@ -1,4 +1,4 @@
-<flynt-component name="BlockCtaForm" class="{{ options.halfSpacing ? 'componentSpacingHalf' : 'componentSpacing' }}"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }}{{ backgroundImage ? ' data-has-bg-image="true"' }}>
+<flynt-component name="FooterCta" class="componentSpacing"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }}{{ backgroundImage ? ' data-has-bg-image="true"' }}>
 
   {% if backgroundImage %}
     <div class="bg-image" aria-hidden="true">
@@ -66,14 +66,14 @@
         {% endif %}
       </div>
 
-      <div class="col-form">
-        {% if formTitle %}
-          <p class="form-title">{{ formTitle|e }}</p>
-        {% endif %}
-        {% if formShortcode %}
+      {% if formShortcode %}
+        <div class="col-form">
+          {% if formTitle %}
+            <p class="form-title">{{ formTitle|e }}</p>
+          {% endif %}
           {{ fn('do_shortcode', formShortcode) }}
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
 
     </div>
   </div>

@@ -5,12 +5,23 @@
     <header>
       {{ renderComponent('BlockPostHeader', {post: post}) }}
     </header>
-    <section class="wp-block-post-content has-global-padding is-layout-constrained">
-        {{ post.content }}
-    </section>
-    <footer>
-      {{ renderComponent('BlockPostFooter', {post: post}) }}
-    </footer>
+    <div class="pageSidebarLayout">
+      <div class="pageSidebarLayout-main">
+        <section class="wp-block-post-content componentSpacing">
+          <div class="container">
+            <div class="content">
+              {{ post.content }}
+            </div>
+          </div>
+        </section>
+        <footer>
+          {{ renderComponent('BlockPostFooter', {post: post}) }}
+        </footer>
+      </div>
+      <aside class="pageSidebarLayout-sidebar">
+        {{ renderComponent('SidebarPromo') }}
+      </aside>
+    </div>
     <section>
       {{ renderComponent('GridPostsLatest', {'taxonomies': post.categories(), 'options': {'theme': 'light', 'maxColumns': 3}}) }}
     </section>

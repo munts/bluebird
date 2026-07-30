@@ -1,4 +1,4 @@
-<flynt-component name="HeroImageText">
+<flynt-component name="HeroImageText" data-has-overlay="{{ options.showOverlay ? 'true' : 'false' }}">
   <picture class="picture">
     {% if images.imageDesktop.post_mime_type == 'image/svg+xml' %}
       <source

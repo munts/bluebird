@@ -62,7 +62,7 @@ function getACFLayout()
                 'type' => 'wysiwyg',
                 'delay' => 0,
                 'media_upload' => 0,
-                'required' => 1,
+                'required' => 0,
             ],
             [
                 'label' => __('Options', 'flynt'),
@@ -84,6 +84,14 @@ function getACFLayout()
                         'type'          => 'true_false',
                         'ui'            => 1,
                         'default_value' => 0,
+                    ],
+                    [
+                        'label'         => __('Show Overlay', 'flynt'),
+                        'instructions'  => __('Adds a dark gradient over the image to improve text readability.', 'flynt'),
+                        'name'          => 'showOverlay',
+                        'type'          => 'true_false',
+                        'ui'            => 1,
+                        'default_value' => 1,
                     ],
                 ],
             ],

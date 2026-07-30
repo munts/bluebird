@@ -31,16 +31,24 @@
 // =============================================================================
 
 // --- Primitive color tokens --------------------------------------------------
+// Hex values below are exact matches to the BB-Web-Guide.pdf brand palette.
 :root {
   // Blues
-  --bb-blue-900: hsla(197, 100%, 16%, 1);
-  --bb-blue-500: hsla(196, 51%, 39%, 1);
-  --bb-blue-300: hsla(197, 48%, 56%, 1);
+  --bb-blue-900: #003a50; // Top navigation bar, H1
+  --bb-blue-500: #327993; // Alternative H1, accent color, outline-only buttons
+  --bb-blue-300: #58a7c5; // Buttons, H3, icons/icon backgrounds
+  --bb-blue-100: hsl(197, 45%, 82%); // Baby blue accent — not in BB-Web-Guide.pdf, placeholder pending exact hex from designer
 
   // Neutrals
   --bb-white:     hsla(0, 0%, 100%, 1);
+  --bb-charcoal:  #272727; // Product navigation bar, alternative section backgrounds
   --bb-gray-800:  hsla(0, 0%, 19%, 1);
+  --bb-gray-300:  #d9d9d9; // Cards, special offer side rail
   --bb-gray-100:  hsla(0, 0%, 90%, 1);
+  --bb-gray-050:  #f3f3f3; // Alternative section backgrounds
+
+  // Accent
+  --bb-yellow-500: #ffde59; // Alternative H1, subtle accents
 
   // Error
   --bb-red-500:   hsla(343, 98%, 46%, 1);
@@ -59,12 +67,19 @@
   --bb-color-text:                  var(--bb-gray-800);
   --bb-color-text-muted:            hsla(0, 0%, 19%, 0.8);
   --bb-color-error:                 var(--bb-red-500);
+
+  // Added for BB-Web-Guide.pdf brand roles not yet wired into components —
+  // available now so designer-requested changes can reference a token directly.
+  --bb-color-charcoal:              var(--bb-charcoal);
+  --bb-color-card-background:       var(--bb-gray-300);
+  --bb-color-surface-alt:           var(--bb-gray-050);
+  --bb-color-accent-yellow:         var(--bb-yellow-500);
 }
 
 // --- Semantic typography tokens ----------------------------------------------
 :root {
-  --bb-font-family-heading:   'Public Sans', 'Trebuchet MS', sans-serif;
-  --bb-font-family-text:      'Public Sans', 'Trebuchet MS', sans-serif;
+  --bb-font-family-heading:   'Montserrat', 'Trebuchet MS', sans-serif;
+  --bb-font-family-text:      'Montserrat', 'Trebuchet MS', sans-serif;
   --bb-font-size-body:        1.125rem;
   --bb-font-size-body-small:  1rem;
 }
@@ -72,6 +87,14 @@
 // --- Header height token (utility 44 + nav 80 + product-bar 56) -------------
 :root {
   --bb-header-height: 180px;
+}
+
+// Bumps the header height token when NavigationMain's optional promo bar
+// (Now Hiring / Specials / etc.) is active, so .mainContent's padding and
+// the sticky sidebar's offset (both keyed off --bb-header-height) stay in
+// sync automatically — see Components/NavigationMain/_style.scss.
+:root:has(flynt-component[name='NavigationMain'][data-has-promo-bar='true']) {
+  --bb-header-height: 220px; // 180px + 40px promo bar
 }
 
 // --- Semantic spacing tokens -------------------------------------------------
@@ -84,32 +107,6 @@
   --bb-box-spacing:         clamp(1rem, 2.50vw + 0.25rem, 2.25rem);
   --bb-container-spacing:   clamp(1rem, 2.5vw + 0.25rem, 2.25rem);
   --bb-component-spacing:   clamp(3rem, 6.5vw + 1.05rem, 6.25rem);
-}
-
-// --- Remap base theme vars to BB tokens --------------------------------------
-:root {
-  --color-accent:               var(--bb-color-primary);
-  --color-background:           var(--bb-color-background);
-  --color-background-secondary: var(--bb-color-background-secondary);
-  --color-border:               var(--bb-color-border);
-  --color-border-secondary:     var(--bb-color-border-secondary);
-  --color-text:                 var(--bb-color-text);
-  --color-text-muted:           var(--bb-color-text-muted);
-  --color-error:                var(--bb-color-error);
-
-  --font-family-heading:  var(--bb-font-family-heading);
-  --font-family-text:     var(--bb-font-family-text);
-  --font-size-body:       var(--bb-font-size-body);
-  --font-size-body-small: var(--bb-font-size-body-small);
-
-  --flow-space:           var(--bb-flow-space);
-  --column-gap:           var(--bb-column-gap);
-  --content-max-width:    var(--bb-content-max-width);
-  --content-max-width-wide: var(--bb-content-max-width-wide);
-  --content-max-width-full: var(--bb-content-max-width-full);
-  --box-spacing:          var(--bb-box-spacing);
-  --container-spacing:    var(--bb-container-spacing);
-  --component-spacing:    var(--bb-component-spacing);
 }
 
 // =============================================================================
@@ -141,4 +138,30 @@ $breakpoint-desktop: 1280px;
   --box-spacing: clamp(1rem, 2.50vw + 0.25rem, 2.25rem);
   --container-spacing: clamp(1rem, 2.5vw + 0.25rem, 2.25rem);
   --component-spacing: clamp(3rem, 6.5vw + 1.05rem, 6.25rem);
+}
+
+// --- Remap base theme vars to BB tokens --------------------------------------
+:root {
+  --color-accent:               var(--bb-color-primary);
+  --color-background:           var(--bb-color-background);
+  --color-background-secondary: var(--bb-color-background-secondary);
+  --color-border:               var(--bb-color-border);
+  --color-border-secondary:     var(--bb-color-border-secondary);
+  --color-text:                 var(--bb-color-text);
+  --color-text-muted:           var(--bb-color-text-muted);
+  --color-error:                var(--bb-color-error);
+
+  --font-family-heading:  var(--bb-font-family-heading);
+  --font-family-text:     var(--bb-font-family-text);
+  --font-size-body:       var(--bb-font-size-body);
+  --font-size-body-small: var(--bb-font-size-body-small);
+
+  --flow-space:           var(--bb-flow-space);
+  --column-gap:           var(--bb-column-gap);
+  --content-max-width:    var(--bb-content-max-width);
+  --content-max-width-wide: var(--bb-content-max-width-wide);
+  --content-max-width-full: var(--bb-content-max-width-full);
+  --box-spacing:          var(--bb-box-spacing);
+  --container-spacing:    var(--bb-container-spacing);
+  --component-spacing:    var(--bb-component-spacing);
 }

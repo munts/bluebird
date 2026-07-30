@@ -1,7 +1,69 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  {% for component in post.meta('pageComponents') %}
+  {% if post.meta('useComponents') %}
+
+    {% set heroItem = post.meta('pageHero')|first %}
+    {% set allComponents = post.meta('pageComponents') %}
+    {% set firstComponent = allComponents|first %}
+    {# Legacy fallback: pages built before the Hero Components field above used the
+       first Page Components item as the hero. New pages should use that field instead. #}
+    {% set hasLegacyHero = not heroItem and firstComponent and firstComponent.acf_fc_layout == 'heroImageText' %}
+
+    {% if heroItem %}
+      {{ renderComponent(heroItem) }}
+    {% elseif hasLegacyHero %}
+      {{ renderComponent(firstComponent) }}
+    {% endif %}
+
+    <div class="pageSidebarLayout">
+      <div class="pageSidebarLayout-main">
+        {% for component in (hasLegacyHero ? allComponents|slice(1) : allComponents) %}
+          {{ renderComponent(component) }}
+        {% endfor %}
+      </div>
+      <aside class="pageSidebarLayout-sidebar">
+        {{ renderComponent('SidebarPromo') }}
+      </aside>
+    </div>
+
+  {% else %}
+
+    {# Classic Content mode (default) — existing Classic Editor copy + Featured
+       Image, for the ~250 already-published pages not being rebuilt with
+       components. Hero image band reuses .secondaryPage-hero from the old
+       page-secondary(-alt).php templates (assets/styles/_pages.scss); the
+       body copy uses .container/.content (not .secondaryPage-content) since
+       that class's own max-width would conflict with the sidebar column here. #}
+    <article class="secondaryPage">
+      {% if post.thumbnail %}
+        <div class="secondaryPage-hero">
+          <img
+            class="secondaryPage-hero-image"
+            src="{{ post.thumbnail.src('full') }}"
+            alt="{{ post.thumbnail.alt|e }}"
+            width="{{ post.thumbnail.width }}"
+            height="{{ post.thumbnail.height }}"
+          >
+        </div>
+      {% endif %}
+      <div class="pageSidebarLayout">
+        <div class="pageSidebarLayout-main">
+          <div class="container componentSpacing">
+            <div class="content">
+              {{ post.content }}
+            </div>
+          </div>
+        </div>
+        <aside class="pageSidebarLayout-sidebar">
+          {{ renderComponent('SidebarPromo') }}
+        </aside>
+      </div>
+    </article>
+
+  {% endif %}
+
+  {% for component in post.meta('pageComponentsFullWidth') %}
     {{ renderComponent(component) }}
   {% endfor %}
 {% endblock %}

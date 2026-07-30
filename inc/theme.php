@@ -13,6 +13,10 @@ add_action('after_setup_theme', function (): void {
      * Remove type attribute from link and script tags.
      */
     add_theme_support('html5', ['script', 'style']);
+
+    // Enables the native Excerpt panel on pages — used as the card
+    // description in components like BlockProductStylesGrid.
+    add_post_type_support('page', 'excerpt');
 });
 
 add_filter('big_image_size_threshold', '__return_false');

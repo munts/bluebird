@@ -1,0 +1,84 @@
+flynt-component[name='BlockProductStylesGrid'] {
+  background-color: var(--bb-charcoal);
+  display: block;
+  padding-block: var(--component-spacing);
+
+  .preContent {
+    margin-block-end: var(--column-gap);
+    max-inline-size: var(--content-max-width-wide);
+  }
+
+  .heading {
+    color: var(--bb-yellow-500);
+    margin-block: 0 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .intro {
+    color: hsla(0, 0%, 100%, 1);
+    margin-block: 0;
+  }
+
+  .grid {
+    display: grid;
+    gap: clamp(1.25rem, 1.25vw + 0.875rem, 1.875rem);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .item-inner {
+    background-color: var(--bb-gray-050);
+    block-size: 100%;
+    border-radius: 8px;
+    color: var(--bb-color-text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover .title {
+      text-decoration: underline;
+      text-underline-offset: 0.3ex;
+    }
+  }
+
+  .image {
+    align-self: center;
+    display: block;
+    margin-block-end: 0.5rem;
+
+    img {
+      block-size: auto;
+      inline-size: 100%;
+      max-inline-size: 200px;
+      object-fit: contain;
+    }
+  }
+
+  .title {
+    color: var(--bb-blue-500);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .description {
+    color: var(--bb-color-text);
+    font-size: var(--font-size-body-small);
+    margin: 0;
+  }
+}

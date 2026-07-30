@@ -2,7 +2,7 @@
   <nav aria-label="{{ labels.ariaLabel|e }}">
     <div class="container">
       {% include 'Partials/_logo.twig' with {'logo': logo, 'site': site} only %}
-      <span class="brand-name">PEAK</span>
+      <span class="brand-name"></span>
       {% if menu %}
         {% include 'Partials/_hamburger.twig' with {'labels': labels} only %}
       {% endif %}

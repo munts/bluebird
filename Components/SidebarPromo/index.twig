@@ -1,0 +1,46 @@
+<flynt-component name="SidebarPromo">
+  {% if heading %}
+    <p class="heading">{{ heading|e }}</p>
+  {% endif %}
+  {% if intro %}
+    <p class="intro">{{ intro|e }}</p>
+  {% endif %}
+  {% if tiers or eyebrow or footnote %}
+    <div class="tiers-box">
+      {% if birdIcon %}
+        <img class="bird-icon" src="{{ birdIcon.src }}" alt="{{ birdIcon.alt }}" width="{{ birdIcon.width }}" height="{{ birdIcon.height }}">
+      {% endif %}
+      {% if eyebrow %}
+        <p class="eyebrow">{{ eyebrow|e }}</p>
+      {% endif %}
+      {% if tiers %}
+        <ul class="tiers">
+          {% for tier in tiers %}
+            {% if tier.quantityNumber or tier.discountValue %}
+              <li class="tier">
+                <span class="tier-number{{ tier.isNumeric ? '' : ' tier-number--word' }}">{{ tier.quantityNumber|e }}</span>
+                <div class="tier-details">
+                  {% if tier.quantityUnit %}
+                    <span class="tier-unit">{{ tier.quantityUnit|e }}</span>
+                  {% endif %}
+                  <span class="tier-value-row">
+                    <span class="tier-equals">=</span><span class="tier-value">{{ tier.discountValue|e }}</span><span class="tier-off">Off</span>
+                  </span>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if footnote %}
+        <p class="footnote">{{ footnote|e }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if primaryButtonLabel and primaryButtonUrl %}
+    <a class="btn-primary" href="{{ primaryButtonUrl|e }}">{{ primaryButtonLabel|e }}</a>
+  {% endif %}
+  {% if secondaryLinkLabel and secondaryLinkUrl %}
+    <a class="btn-secondary" href="{{ secondaryLinkUrl|e }}">{{ secondaryLinkLabel|e }}</a>
+  {% endif %}
+</flynt-component>

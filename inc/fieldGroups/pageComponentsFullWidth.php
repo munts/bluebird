@@ -5,13 +5,14 @@ use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function (): void {
     ACFComposer::registerFieldGroup([
-        'name' => 'pageComponents',
-        'title' => __('Page Components', 'flynt'),
+        'name' => 'pageComponentsFullWidth',
+        'title' => __('Full Width Components', 'flynt'),
         'style' => 'seamless',
         'fields' => [
             [
-                'name' => 'pageComponents',
-                'label' => __('Page Components', 'flynt'),
+                'name' => 'pageComponentsFullWidth',
+                'label' => __('Full Width Components', 'flynt'),
+                'instructions' => __('Rendered full width, below the sidebar layout above.', 'flynt'),
                 'type' => 'flexible_content',
                 'button_label' => __('Add Component', 'flynt'),
                 'layouts' => [
@@ -53,14 +54,17 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                     'param' => 'post_type',
                     'operator' => '==',
                     'value' => 'page'
-                ]
-            ],
-            [
+                ],
                 [
-                    'param' => 'post_type',
+                    'param' => 'page_template',
                     'operator' => '==',
-                    'value' => 'service'
-                ]
+                    'value' => 'default'
+                ],
+                [
+                    'param' => 'page_type',
+                    'operator' => '!=',
+                    'value' => 'front_page'
+                ],
             ],
         ],
     ]);

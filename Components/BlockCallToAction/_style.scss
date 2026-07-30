@@ -47,7 +47,7 @@ flynt-component[name='BlockCallToAction'] {
   }
 
   .btn {
-    --btn-border-radius: 6px;
+    --btn-border-radius: 0;
     --btn-border-width: 2px;
 
     appearance: none;
@@ -69,39 +69,25 @@ flynt-component[name='BlockCallToAction'] {
       opacity: 0.85;
     }
 
-    // Red background, white text
-    &--red {
-      background-color: var(--color-accent);
-      border-color: var(--color-accent);
+    // Navy background, white text
+    &--navy {
+      background-color: var(--bb-blue-900);
+      border-color: var(--bb-blue-900);
       color: #fff;
     }
 
-    // White background, accent text
-    &--white {
+    // Light blue background, white text
+    &--light-blue {
+      background-color: var(--bb-blue-300);
+      border-color: var(--bb-blue-300);
+      color: #fff;
+    }
+
+    // White background, navy border/text
+    &--white-outline-blue {
       background-color: #fff;
-      border-color: #fff;
-      color: var(--color-accent);
-    }
-
-    // Transparent background, accent border/text
-    &--outline-red {
-      background-color: transparent;
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-    }
-
-    // Transparent background, white border/text
-    &--outline-white {
-      background-color: transparent;
-      border-color: #fff;
-      color: #fff;
-    }
-
-    // Transparent background, black border/text
-    &--outline-black {
-      background-color: transparent;
-      border-color: #000;
-      color: #000;
+      border-color: var(--bb-blue-900);
+      color: var(--bb-blue-900);
     }
   }
 
@@ -118,7 +104,7 @@ flynt-component[name='BlockCallToAction'] {
   }
 
   &[data-theme="light"] {
-    --heading-color: hsl(2, 85%, 32%);
+    --heading-color: var(--bb-color-primary);
   }
 
   .eyebrow {
@@ -149,13 +135,13 @@ flynt-component[name='BlockCallToAction'] {
   }
 
   h3 {
-    color: var(--color-accent-headline);
+    color: var(--bb-color-primary);
     margin-block-start: 15px;
     text-transform: uppercase;
   }
 
   h4 {
-    color: var(--color-accent-headline);
+    color: var(--bb-color-primary);
     font-size: 1.5rem;
     margin-block-start: 15px;
     text-transform: uppercase;

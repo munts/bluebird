@@ -16,7 +16,7 @@
     {% if options.overlayColor and options.overlayColor != 'none' %}
       <div
         class="overlay"
-        style="--overlay-bg: {{ options.overlayColor == 'red' ? 'var(--overlay-red)' : 'hsl(0, 0%, 0%)' }}; --overlay-opacity: {{ options.overlayOpacity / 100 }};"
+        style="--overlay-bg: {{ options.overlayColor == 'navy' ? 'var(--bb-color-primary)' : 'hsl(0, 0%, 0%)' }}; --overlay-opacity: {{ options.overlayOpacity / 100 }};"
         aria-hidden="true"
       ></div>
     {% endif %}

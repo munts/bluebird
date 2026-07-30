@@ -2,16 +2,25 @@ flynt-component[name='NavigationMain'] {
   --navigation-height: 80px;
   --utility-bar-height: 44px;
   --product-bar-height: 56px;
+  --promo-bar-height: 0;
   --utility-diagonal-start: 320px; // adjust to align diagonal with logo right edge
 
   background-color: #fff;
-  block-size: calc(var(--navigation-height) + var(--utility-bar-height) + var(--product-bar-height));
+  block-size: calc(var(--navigation-height) + var(--utility-bar-height) + var(--product-bar-height) + var(--promo-bar-height));
   display: none;
   font-size: var(--font-size-body-small);
   inline-size: 100%;
   inset-block-start: 0;
   position: fixed;
   z-index: 1000;
+
+  // Reserves space for the promo bar only when it's actually in use — see
+  // the matching :root:has() override for --bb-header-height in
+  // assets/styles/_variables.scss, which keeps .mainContent's padding and
+  // the sticky sidebar's offset in sync with this.
+  &[data-has-promo-bar='true'] {
+    --promo-bar-height: 40px;
+  }
 
   .admin-bar & {
     inset-block-start: var(--wp-admin--admin-bar--height);
@@ -20,6 +29,29 @@ flynt-component[name='NavigationMain'] {
   @media (min-width: $breakpoint-tablet-horizontal) {
     display: flex;
     flex-direction: column;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Promo bar — optional, occasional-use announcement strip, above everything
+  // ---------------------------------------------------------------------------
+  .promo-bar {
+    background-color: var(--bb-yellow-500);
+    block-size: var(--promo-bar-height);
+    overflow: hidden;
+  }
+
+  .promo-bar-inner {
+    align-items: center;
+    block-size: 100%;
+    display: flex;
+    justify-content: center;
+    padding-inline: var(--container-spacing);
+  }
+
+  .promo-bar-cta {
+    font-size: 0.8rem;
+    padding-block: 0.3rem;
+    padding-inline: 1rem;
   }
 
   // ---------------------------------------------------------------------------
@@ -138,11 +170,27 @@ flynt-component[name='NavigationMain'] {
   }
 
   .product-bar-item {
-    align-items: center;
     border-inline-end: 1px solid hsla(0, 0%, 100%, 0.15);
+    flex: 1;
+    position: relative;
+
+    &:last-child {
+      border-inline-end: 0;
+    }
+
+    &.has-children:hover .product-bar-submenu,
+    &.has-children:focus-within .product-bar-submenu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+
+  .product-bar-link {
+    align-items: center;
+    block-size: 100%;
     color: hsla(0, 0%, 100%, 1);
     display: flex;
-    flex: 1;
     font-weight: 700;
     gap: 0.75rem;
     justify-content: center;
@@ -151,22 +199,25 @@ flynt-component[name='NavigationMain'] {
     text-transform: uppercase;
     transition: background-color 0.2s ease;
 
-    &:last-child {
-      border-inline-end: 0;
-    }
-
     &:hover {
       background-color: hsla(0, 0%, 100%, 0.08);
     }
   }
 
   .product-bar-icon {
+    align-items: center;
     block-size: 2rem;
     display: flex;
     flex-shrink: 0;
     inline-size: 2rem;
+    justify-content: center;
 
-    img {
+    &--fa {
+      color: var(--bb-blue-300);
+      font-size: 1.25rem;
+    }
+
+    &--img img {
       block-size: 100%;
       inline-size: 100%;
       object-fit: contain;
@@ -175,6 +226,49 @@ flynt-component[name='NavigationMain'] {
 
   .product-bar-label {
     font-size: var(--font-size-body-small);
+  }
+
+  .product-bar-submenu {
+    background-color: var(--color-background);
+    border-block-start: 3px solid var(--bb-blue-300);
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.2);
+    inline-size: 100%;
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    list-style: none;
+    min-inline-size: 220px;
+    opacity: 0;
+    padding-block: 0.5rem;
+    padding-inline: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 10;
+  }
+
+  .product-bar-submenu-item {
+    display: block;
+
+    &.current-menu-item .product-bar-submenu-link {
+      color: var(--bb-color-primary);
+    }
+  }
+
+  .product-bar-submenu-link {
+    color: var(--color-text);
+    display: block;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding-block: 0.6rem;
+    padding-inline: 1.25rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--bb-color-primary);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -248,6 +342,46 @@ flynt-component[name='NavigationMain'] {
   .modal-title {
     margin-block-end: 1.5rem;
     padding-inline-end: 2rem;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Buttons — used by the promo bar CTA
+  // ---------------------------------------------------------------------------
+  .btn {
+    appearance: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &--navy {
+      background-color: var(--bb-blue-900);
+      border-color: var(--bb-blue-900);
+      color: hsla(0, 0%, 100%, 1);
+    }
+
+    &--light-blue {
+      background-color: var(--bb-blue-300);
+      border-color: var(--bb-blue-300);
+      color: hsla(0, 0%, 100%, 1);
+    }
+
+    &--white-outline-blue {
+      background-color: #fff;
+      border-color: var(--bb-blue-900);
+      color: var(--bb-blue-900);
+    }
   }
 
   @import 'Partials/logo';

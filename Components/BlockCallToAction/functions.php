@@ -19,7 +19,7 @@ function getACFLayout(): array
             ],
             [
                 'label' => __('Eyebrow Text', 'flynt'),
-                'instructions' => __('Small red uppercase text displayed above the main heading, e.g. "Serving Eagle County & Surrounding Areas".', 'flynt'),
+                'instructions' => __('Small uppercase text displayed above the main heading, e.g. "Serving Eagle County & Surrounding Areas".', 'flynt'),
                 'name' => 'eyebrow',
                 'type' => 'text',
                 'required' => 0,
@@ -75,13 +75,11 @@ function getACFLayout(): array
                         'ui' => 0,
                         'ajax' => 0,
                         'choices' => [
-                            'red'           => __('Red — Red bg, White text', 'flynt'),
-                            'white'         => __('White — White bg, Red text', 'flynt'),
-                            'outline-red'   => __('Outlined Red — Red border & text', 'flynt'),
-                            'outline-white' => __('Outlined White — White border & text', 'flynt'),
-                            'outline-black' => __('Outlined Black — Black border & text', 'flynt'),
+                            'navy'               => __('Navy — Navy bg, White text', 'flynt'),
+                            'light-blue'         => __('Light Blue — Light blue bg, White text', 'flynt'),
+                            'white-outline-blue' => __('White — White bg, Navy border & text', 'flynt'),
                         ],
-                        'default_value' => 'red',
+                        'default_value' => 'navy',
                         'wrapper' => ['width' => '22'],
                     ],
                     [
@@ -137,7 +135,7 @@ function getACFLayout(): array
                         'ajax' => 0,
                         'choices' => [
                             'none'  => __('None', 'flynt'),
-                            'red'   => __('Red', 'flynt'),
+                            'navy'  => __('Navy', 'flynt'),
                             'black' => __('Black', 'flynt'),
                         ],
                         'default_value' => 'none',

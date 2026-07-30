@@ -407,6 +407,25 @@ flynt-component {
   }
 }
 
+.pageSidebarLayout {
+  display: grid;
+  gap: var(--column-gap);
+  grid-template-columns: 1fr;
+
+  @media (min-width: $breakpoint-tablet-horizontal) {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+.pageSidebarLayout-sidebar {
+  align-self: start;
+
+  @media (min-width: $breakpoint-tablet-horizontal) {
+    inset-block-start: calc(var(--bb-header-height) + var(--container-spacing));
+    position: sticky;
+  }
+}
+
 .componentSpacing {
   margin-block: var(--component-spacing);
   margin-inline: 0;
