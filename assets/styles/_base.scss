@@ -115,12 +115,32 @@ code {
 }
 
 img {
-  block-size: initial;
-  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 100%;
+}
 
-  .wp-block-image & {
-    inline-size: initial;
-  }
+// WordPress classic editor alignment classes — no theme support existed for
+// these at all, so legacy Classic Editor content (bare <img> tags, not
+// wrapped in a Gutenberg .wp-block-image figure) had no float/margin styling.
+.alignleft {
+  float: inline-start;
+  margin-block-end: 1rem;
+  margin-inline-end: 1.5rem;
+}
+
+.alignright {
+  float: inline-end;
+  margin-block-end: 1rem;
+  margin-inline-start: 1.5rem;
+}
+
+.aligncenter {
+  display: block;
+  margin-inline: auto;
+}
+
+.alignnone {
+  margin-block-end: 1rem;
 }
 
 figcaption {
