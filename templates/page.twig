@@ -46,6 +46,18 @@
             height="{{ post.thumbnail.height }}"
           >
         </div>
+      {% elseif heroFallbackImage %}
+        {# Legacy fallback for the ~15 old-site pages with a unique hero image
+           — see inc/heroFallbacks.php. Only used until an admin sets a real
+           Featured Image, which always takes priority above. #}
+        <div class="secondaryPage-hero">
+          <img
+            class="secondaryPage-hero-image"
+            src="{{ heroFallbackImage|e }}"
+            alt=""
+            loading="lazy"
+          >
+        </div>
       {% endif %}
       <div class="pageSidebarLayout">
         <div class="pageSidebarLayout-main">
