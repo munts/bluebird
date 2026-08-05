@@ -1,5 +1,10 @@
 flynt-component[name='BlockCtaForm'] {
   --heading-color: var(--color-text);
+  scroll-margin-block-start: var(--bb-header-height);
+
+  &:focus {
+    outline: none;
+  }
 
   &[data-has-bg-image='true'] {
     margin: 0;

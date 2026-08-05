@@ -39,12 +39,12 @@
             {% if card.cardText %}
               <p class="card-text">{{ card.cardText }}</p>
             {% endif %}
-            {% if card.cardLink %}
+            {% if card.cardLinkLabel and card.cardLinkUrl %}
               <a
                 class="card-link"
-                href="{{ card.cardLink.url|e('esc_url') }}"
-                {{ card.cardLink.target ? 'target="' ~ card.cardLink.target ~ '" rel="noopener noreferrer"' }}>
-                {{ card.cardLink.title }} &gt;&gt;
+                href="{{ card.cardLinkUrl|e }}"
+                {% if card.cardLinkNewWindow %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                {{ card.cardLinkLabel|e }} &gt;&gt;
               </a>
             {% endif %}
           </div>

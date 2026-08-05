@@ -49,13 +49,13 @@
       </ul>
     {% endif %}
 
-    {% if ctaLink %}
+    {% if ctaLabel and ctaUrl %}
       <div class="ctaWrap">
         <a
           class="ctaButton"
-          href="{{ ctaLink.url }}"
-          {% if ctaLink.target %}target="{{ ctaLink.target }}" rel="noopener"{% endif %}>
-          {{ ctaLink.title }}
+          href="{{ ctaUrl|e }}"
+          {% if ctaNewWindow %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {{ ctaLabel|e }}
         </a>
       </div>
     {% endif %}

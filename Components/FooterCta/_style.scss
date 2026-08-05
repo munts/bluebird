@@ -2,6 +2,10 @@ flynt-component[name='FooterCta'] {
   --heading-color: var(--color-text);
   scroll-margin-block-start: var(--bb-header-height);
 
+  &:focus {
+    outline: none;
+  }
+
   &[data-has-bg-image='true'] {
     margin: 0;
     padding-block: var(--component-spacing);
