@@ -4,8 +4,11 @@ use ACFComposer\ACFComposer;
 use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function (): void {
-    $heroLayout = Components\HeroImageText\getACFLayout();
-    $heroLayout['max'] = 1;
+    $heroImageTextLayout = Components\HeroImageText\getACFLayout();
+    $heroImageTextLayout['max'] = 1;
+
+    $heroImageTextBelowLayout = Components\HeroImageTextBelow\getACFLayout();
+    $heroImageTextBelowLayout['max'] = 1;
 
     ACFComposer::registerFieldGroup([
         'name' => 'pageHero',
@@ -19,8 +22,10 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                 'instructions' => __('Displayed full width, anchored just below the header, above Page Components. Optional — leave empty for no hero on this page.', 'flynt'),
                 'type' => 'flexible_content',
                 'button_label' => __('Add Component', 'flynt'),
+                'max' => 1,
                 'layouts' => [
-                    $heroLayout,
+                    $heroImageTextLayout,
+                    $heroImageTextBelowLayout,
                 ],
             ],
         ],

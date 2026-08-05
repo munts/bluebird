@@ -1,0 +1,34 @@
+<flynt-component name="BlockComparisonTable" data-spacing="{{ options.spacing ?: 'normal' }}">
+  <div class="container">
+    <div class="content">
+      {% if heading %}
+        <h3 class="heading">{{ heading|e }}</h3>
+      {% endif %}
+      {% if rows|length > 0 %}
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-1">{{ column1Label|e }}</th>
+                <th class="col-2">{{ column2Label|e }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+                <tr>
+                  <td class="col-1">{{ row.column1Text|e }}</td>
+                  <td class="col-2">{{ row.column2Text|e }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+      {% if closingHtml %}
+        <div class="wysiwyg">
+          {{ closingHtml|e('wp_kses_post') }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</flynt-component>

@@ -23,6 +23,17 @@ function getACFLayout(): array
                 'endpoint' => 0
             ],
             [
+                'label' => __('Mascot Graphic', 'flynt'),
+                'instructions' => __('Optional. Displayed in its own column to the left of the accordion — same concept as the Bluebird logo in Block: CTA + Form, but typically a different graphic/pose.', 'flynt'),
+                'name' => 'mascotImage',
+                'type' => 'image',
+                'return_format' => 'array',
+                'preview_size' => 'thumbnail',
+                'library' => 'all',
+                'mime_types' => 'svg,png,jpg,jpeg,webp',
+                'required' => 0,
+            ],
+            [
                 'label' => __('Title', 'flynt'),
                 'instructions' => __('Want to add a headline? And a paragraph? Go ahead! Or just leave it empty and nothing will be shown.', 'flynt'),
                 'name' => 'preContentHtml',

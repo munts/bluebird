@@ -1,7 +1,4 @@
 flynt-component[name='BlockCallToAction'] {
-  // Default theme (acts as "none")
-  --heading-color: #000;
-
   // When a background image is present, switch from margin to padding
   // so the image fills edge-to-edge
   &[data-has-bg-image="true"] {
@@ -93,18 +90,12 @@ flynt-component[name='BlockCallToAction'] {
 
   // Theme overrides
   &[data-theme="dark"] {
-    --heading-color: #fff;
-
-      .btn {
+    .btn {
       // Force all buttons into white-outline style
       background-color: transparent;
       border-color: #fff;
       color: #fff;
     }
-  }
-
-  &[data-theme="light"] {
-    --heading-color: var(--bb-color-primary);
   }
 
   .eyebrow {
@@ -128,8 +119,14 @@ flynt-component[name='BlockCallToAction'] {
   }
 
   // Headings
+  h1 {
+    color: var(--bb-blue-900);
+    margin-block-start: 0;
+    text-transform: uppercase;
+  }
+
   h2 {
-    color: var(--heading-color);
+    color: var(--bb-blue-300);
     margin-block-start: 0;
     text-transform: uppercase;
   }

@@ -25,6 +25,28 @@ function getTheme($default = ''): array
     ];
 }
 
+function getSpacing($default = 'normal'): array
+{
+    return [
+        'label' => __('Spacing', 'flynt'),
+        'instructions' => __('Controls the top and bottom spacing around this component.', 'flynt'),
+        'name' => 'spacing',
+        'type' => 'select',
+        'allow_null' => 0,
+        'multiple' => 0,
+        'ui' => 0,
+        'ajax' => 0,
+        'choices' => [
+            'normal'    => __('Normal', 'flynt'),
+            'half'      => __('Half', 'flynt'),
+            'none'      => __('None — Remove Top & Bottom', 'flynt'),
+            'no-top'    => __('Remove Top Only', 'flynt'),
+            'no-bottom' => __('Remove Bottom Only', 'flynt'),
+        ],
+        'default_value' => $default,
+    ];
+}
+
 function getSize($default = 'medium'): array
 {
     return [

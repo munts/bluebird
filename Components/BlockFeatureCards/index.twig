@@ -1,0 +1,28 @@
+<flynt-component name="BlockFeatureCards" data-spacing="{{ options.spacing ?: 'normal' }}"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }}>
+  <div class="container">
+    {% if heading or description %}
+      <div class="header">
+        {% if heading %}
+          <h2 class="heading">{{ heading|e }}</h2>
+        {% endif %}
+        {% if description %}
+          <p class="description">{{ description|e }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if cards|length > 0 %}
+      <div class="grid">
+        {% for card in cards %}
+          <div class="card">
+            {% if card.cardTitle %}
+              <h3 class="card-title">{{ card.cardTitle|e }}</h3>
+            {% endif %}
+            {% if card.cardText %}
+              <p class="card-text">{{ card.cardText|e }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</flynt-component>

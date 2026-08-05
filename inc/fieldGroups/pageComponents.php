@@ -43,7 +43,10 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                     Components\BlockAllLocationsMap\getACFLayout(),
                     Components\BlockAccoladesSlider\getACFLayout(),
                     Components\BlockCtaForm\getACFLayout(),
-                    Components\BlockLocationInfo\getACFLayout()
+                    Components\BlockLocationInfo\getACFLayout(),
+                    Components\HeroImageTextBelow\getACFLayout(),
+                    Components\BlockFeatureCards\getACFLayout(),
+                    Components\BlockComparisonTable\getACFLayout(),
                 ],
             ],
         ],

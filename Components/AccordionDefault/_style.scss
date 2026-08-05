@@ -1,4 +1,40 @@
 flynt-component[name='AccordionDefault'] {
+  .layout {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--column-gap);
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      align-items: flex-start;
+      flex-direction: row;
+    }
+  }
+
+  .col-mascot {
+    flex-shrink: 0;
+    inline-size: 100%;
+    max-inline-size: 280px;
+  }
+
+  .mascot-graphic {
+    block-size: auto;
+    display: block;
+    inline-size: 100%;
+    object-fit: contain;
+  }
+
+  .col-content {
+    inline-size: 100%;
+  }
+
+  .intro {
+    :is(h1, h2, h3, h4, h5, h6) {
+      color: var(--bb-blue-900);
+      text-transform: uppercase;
+    }
+  }
+
   .items {
     list-style: none;
     padding-inline-start: 0;
@@ -19,7 +55,7 @@ flynt-component[name='AccordionDefault'] {
 
   .trigger {
     --icon-size: 10px;
-    color: hsla(0, 0%, 0%, 1);
+    color: var(--bb-blue-300);
     cursor: pointer;
     font-family: var(--font-family-heading);
     font-size: 1.125rem;

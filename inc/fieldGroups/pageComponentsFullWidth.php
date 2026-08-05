@@ -17,6 +17,9 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                 'button_label' => __('Add Component', 'flynt'),
                 'layouts' => [
                     Components\HeroImageText\getACFLayout(),
+                    Components\HeroImageTextBelow\getACFLayout(),
+                    Components\BlockFeatureCards\getACFLayout(),
+                    Components\BlockComparisonTable\getACFLayout(),
                     Components\BlockAnchor\getACFLayout(),
                     Components\BlockCallToAction\getACFLayout(),
                     Components\BlockPromotionRow\getACFLayout(),

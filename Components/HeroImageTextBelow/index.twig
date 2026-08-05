@@ -1,0 +1,65 @@
+<flynt-component name="HeroImageTextBelow" data-spacing="{{ options.spacing ?: 'normal' }}">
+  {% if image %}
+    <div class="image" aria-hidden="{{ image.alt ? 'false' : 'true' }}">
+      <img
+        src="{{ image.src|resizeDynamic(1920) }}"
+        srcset="
+          {{ image.src|resizeDynamic(1920) }} 1920w,
+          {{ image.src|resizeDynamic(1440) }} 1440w,
+          {{ image.src|resizeDynamic(1024) }} 1024w,
+          {{ image.src|resizeDynamic(768) }} 768w"
+        sizes="100vw"
+        alt="{{ image.alt|e }}"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+  <div class="content-band"{{ options.theme ? ' data-theme="' ~ options.theme ~ '"' }}>
+    <div class="container">
+      <div class="content">
+        {% if heading %}
+          <h2 class="heading">{{ heading|e }}</h2>
+        {% endif %}
+        {% if introHtml %}
+          <div class="wysiwyg">
+            {{ introHtml|e('wp_kses_post') }}
+          </div>
+        {% endif %}
+        {% if checklistItems|length > 0 %}
+          <ul class="checklist">
+            {% for item in checklistItems %}
+              {% if item.text %}
+                <li class="checklist-item">
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="text">{{ item.text|e }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if contentHtml %}
+          <div class="wysiwyg">
+            {{ contentHtml|e('wp_kses_post') }}
+          </div>
+        {% endif %}
+        {% if buttons %}
+          <div class="actions">
+            {% for button in buttons %}
+              {% if button.label and button.url %}
+                <a
+                  class="btn btn--{{ button.style|e }}"
+                  href="{{ button.url|e }}"
+                  {% if button.newWindow %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >{{ button.label|e }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</flynt-component>
