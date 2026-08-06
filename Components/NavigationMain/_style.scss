@@ -22,6 +22,17 @@ flynt-component[name='NavigationMain'] {
     --promo-bar-height: 40px;
   }
 
+  // Short viewports (e.g. small laptops) leave little room below the fixed
+  // header for the product-bar dropdown's ~15 items to fit. Compressing the
+  // header's own rows frees up real space — paired with the matching
+  // --bb-header-height override in _variables.scss and the submenu/logo
+  // sizing (Partials/_logo.scss), which both key off these same variables.
+  @media (max-height: 800px) {
+    --navigation-height: 64px;
+    --utility-bar-height: 36px;
+    --product-bar-height: 44px;
+  }
+
   .admin-bar & {
     inset-block-start: var(--wp-admin--admin-bar--height);
   }
@@ -144,11 +155,18 @@ flynt-component[name='NavigationMain'] {
     position: relative;
   }
 
+  // Overrides the shared global .container class (assets/styles/_base.scss),
+  // which centers content within a max-width — correct for page content,
+  // but it's why the logo drifted away from the true left edge on wide
+  // screens. This row stays edge-to-edge like .utility-inner above it, so
+  // the logo always pins to the true upper-left corner.
   .container {
     align-items: center;
     block-size: 100%;
     display: flex;
     justify-content: space-between;
+    margin-inline: 0;
+    max-inline-size: none;
     padding-inline: var(--container-spacing);
     position: relative;
     z-index: 1;
@@ -245,6 +263,14 @@ flynt-component[name='NavigationMain'] {
     transform: translateY(-6px);
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     z-index: 10;
+
+    // Short viewports (e.g. small laptops) have less room below the fixed
+    // header for a 15-item submenu to fit — tighten this up instead of
+    // scrolling. Paired with the header/logo compression below and the
+    // matching --bb-header-height override in _variables.scss.
+    @media (max-height: 800px) {
+      padding-block: 0.25rem;
+    }
   }
 
   .product-bar-submenu-item {
@@ -260,6 +286,7 @@ flynt-component[name='NavigationMain'] {
     display: block;
     font-weight: 600;
     letter-spacing: 0.04em;
+    line-height: 1.2;
     padding-block: 0.6rem;
     padding-inline: 1.25rem;
     text-decoration: none;
@@ -268,6 +295,11 @@ flynt-component[name='NavigationMain'] {
 
     &:hover {
       color: var(--bb-color-primary);
+    }
+
+    @media (max-height: 800px) {
+      font-size: 0.875rem;
+      padding-block: 0.35rem;
     }
   }
 

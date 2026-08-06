@@ -5,18 +5,22 @@ use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function (): void {
     ACFComposer::registerFieldGroup([
-        'name' => 'pageComponents',
-        'title' => __('Page Components', 'flynt'),
+        'name' => 'pageComponentsFullWidthTop',
+        'title' => __('Full Width Components (Top)', 'flynt'),
         'style' => 'seamless',
-        'menu_order' => -1,
+        'menu_order' => -2,
         'fields' => [
             [
-                'name' => 'pageComponents',
-                'label' => __('Page Components', 'flynt'),
+                'name' => 'pageComponentsFullWidthTop',
+                'label' => __('Full Width Components (Top)', 'flynt'),
+                'instructions' => __('Rendered full width, above the sidebar layout below — e.g. a hero video/image that should span edge-to-edge before the sidebar begins. Homepage only.', 'flynt'),
                 'type' => 'flexible_content',
                 'button_label' => __('Add Component', 'flynt'),
                 'layouts' => [
                     Components\HeroImageText\getACFLayout(),
+                    Components\HeroImageTextBelow\getACFLayout(),
+                    Components\BlockFeatureCards\getACFLayout(),
+                    Components\BlockComparisonTable\getACFLayout(),
                     Components\BlockAnchor\getACFLayout(),
                     Components\BlockCallToAction\getACFLayout(),
                     Components\BlockPromotionRow\getACFLayout(),
@@ -44,10 +48,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                     Components\BlockAllLocationsMap\getACFLayout(),
                     Components\BlockAccoladesSlider\getACFLayout(),
                     Components\BlockCtaForm\getACFLayout(),
-                    Components\BlockLocationInfo\getACFLayout(),
-                    Components\HeroImageTextBelow\getACFLayout(),
-                    Components\BlockFeatureCards\getACFLayout(),
-                    Components\BlockComparisonTable\getACFLayout(),
+                    Components\BlockLocationInfo\getACFLayout()
                 ],
             ],
         ],
@@ -57,14 +58,12 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                     'param' => 'post_type',
                     'operator' => '==',
                     'value' => 'page'
-                ]
-            ],
-            [
+                ],
                 [
-                    'param' => 'post_type',
+                    'param' => 'page_type',
                     'operator' => '==',
-                    'value' => 'service'
-                ]
+                    'value' => 'front_page'
+                ],
             ],
         ],
     ]);

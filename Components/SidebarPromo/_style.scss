@@ -1,6 +1,5 @@
 flynt-component[name='SidebarPromo'] {
   background-color: var(--bb-gray-050);
-  border-radius: 8px;
   display: block;
   margin-inline: auto;
   max-inline-size: 420px;
@@ -166,6 +165,71 @@ flynt-component[name='SidebarPromo'] {
 
     &:hover {
       opacity: 0.85;
+    }
+  }
+
+  // Short viewports (e.g. small laptops) don't have room below the sticky
+  // offset for this box's full-height spacing — trim it down instead of
+  // clipping/scrolling. Sits in the ~320px sticky column above
+  // $breakpoint-tablet-horizontal, so this only ever applies there too.
+  @media (max-height: 800px) {
+    padding: 1rem;
+
+    .heading {
+      font-size: 1.25rem;
+    }
+
+    .intro {
+      margin-block-end: 1rem;
+    }
+
+    .tiers-box {
+      margin-block-start: 1rem;
+      padding-block: 1rem 0.75rem;
+    }
+
+    .bird-icon {
+      block-size: 2.75rem;
+      inset-block-start: -1.375rem;
+    }
+
+    .eyebrow {
+      margin-block-end: 0.5rem;
+    }
+
+    .tiers {
+      margin-block-end: 0.5rem;
+      row-gap: 0.35rem;
+    }
+
+    .tier-number {
+      font-size: 2.5rem;
+
+      &--word {
+        font-size: 1rem;
+      }
+    }
+
+    .tier-unit {
+      font-size: 1rem;
+    }
+
+    .tier-equals {
+      font-size: 1.375rem;
+    }
+
+    .tier-value {
+      font-size: 1.875rem;
+    }
+
+    .btn-primary {
+      margin-block-start: 0.75rem;
+      padding-block: 0.5rem;
+    }
+
+    .btn-secondary {
+      margin-block-start: 0.5rem;
+      padding-block: 0.375rem;
     }
   }
 }

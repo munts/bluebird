@@ -21,6 +21,15 @@ add_filter('Flynt/addComponentData?name=NavigationMain', function (array $data):
         'alt' => get_bloginfo('name')
     ];
 
+    // Split logo (bird icon + wordmark) — lets the bird scale up and overlap
+    // into the utility bar independently of the wordmark. Optional: falls
+    // back to the single combined $data['logo'] above (Customizer logo, or
+    // the bundled SVG) until both halves are uploaded here. Lives on Global
+    // Options (not Translatable) since a logo image isn't language-specific.
+    $logoParts = Options::getGlobal('NavigationMain', 'logo') ?: [];
+    $data['logoIcon'] = $logoParts['icon'] ?: null;
+    $data['logoWordmark'] = $logoParts['wordmark'] ?: null;
+
     $data['productNav'] = Timber::get_menu('product_nav');
 
     return $data;
@@ -69,6 +78,41 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         ],
     ]);
 });
+
+Options::addGlobal('NavigationMain', [
+    [
+        'label' => '',
+        'name' => 'logo',
+        'type' => 'group',
+        'layout' => 'row',
+        'sub_fields' => [
+            [
+                'label' => __('Bird Icon', 'flynt'),
+                'instructions' => __('Bird graphic only, no text. SVG or PNG with transparent background recommended. Optional — when both this and Wordmark below are set, they replace the combined logo (Appearance → Customize → Site Identity) and can be sized/positioned independently, e.g. the bird overlapping into the utility bar.', 'flynt'),
+                'name' => 'icon',
+                'type' => 'image',
+                'return_format' => 'array',
+                'preview_size' => 'thumbnail',
+                'library' => 'all',
+                'mime_types' => 'svg,png,webp',
+                'required' => 0,
+                'wrapper' => ['width' => '50'],
+            ],
+            [
+                'label' => __('Wordmark', 'flynt'),
+                'instructions' => __('"BlueBird Windows | Doors | Siding" text graphic, no bird. SVG or PNG with transparent background recommended.', 'flynt'),
+                'name' => 'wordmark',
+                'type' => 'image',
+                'return_format' => 'array',
+                'preview_size' => 'thumbnail',
+                'library' => 'all',
+                'mime_types' => 'svg,png,webp',
+                'required' => 0,
+                'wrapper' => ['width' => '50'],
+            ],
+        ],
+    ],
+]);
 
 Options::addTranslatable('NavigationMain', [
     [

@@ -8,6 +8,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         'name' => 'pageComponentsFullWidth',
         'title' => __('Full Width Components', 'flynt'),
         'style' => 'seamless',
+        'menu_order' => 0,
         'fields' => [
             [
                 'name' => 'pageComponentsFullWidth',
@@ -66,6 +67,18 @@ add_action('Flynt/afterRegisterComponents', function (): void {
                 [
                     'param' => 'page_type',
                     'operator' => '!=',
+                    'value' => 'front_page'
+                ],
+            ],
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'page'
+                ],
+                [
+                    'param' => 'page_type',
+                    'operator' => '==',
                     'value' => 'front_page'
                 ],
             ],

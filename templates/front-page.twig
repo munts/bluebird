@@ -1,11 +1,35 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  {% for component in post.meta('pageComponents') %}
+  {% for component in post.meta('pageComponentsFullWidthTop') %}
+    {{ renderComponent(component) }}
+  {% endfor %}
+
+  {% if post.meta('homepageSidebarEnabled') %}
+    <div class="pageSidebarLayout">
+      <div class="pageSidebarLayout-main">
+        {% for component in post.meta('pageComponents') %}
+          {{ renderComponent(component) }}
+        {% endfor %}
+      </div>
+      <aside class="pageSidebarLayout-sidebar">
+        {{ renderComponent('SidebarPromo') }}
+      </aside>
+    </div>
+  {% else %}
+    {% for component in post.meta('pageComponents') %}
+      {{ renderComponent(component) }}
+    {% endfor %}
+  {% endif %}
+
+  {% for component in post.meta('pageComponentsFullWidth') %}
     {{ renderComponent(component) }}
   {% endfor %}
 {% endblock %}
 
 {% block footer %}
+  {% if post.meta('homepageFooterCtaEnabled') %}
+    {{ renderComponent('FooterCta') }}
+  {% endif %}
   {{ renderComponent('NavigationFooter') }}
 {% endblock %}

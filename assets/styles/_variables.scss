@@ -97,6 +97,19 @@
   --bb-header-height: 220px; // 180px + 40px promo bar
 }
 
+// Matches the header-row compression in Components/NavigationMain/_style.scss
+// (same max-height: 800px breakpoint) so .mainContent's padding and the
+// sticky sidebar's offset shrink in step with the actual header height.
+@media (max-height: 800px) {
+  :root {
+    --bb-header-height: 144px; // 64 + 36 + 44
+  }
+
+  :root:has(flynt-component[name='NavigationMain'][data-has-promo-bar='true']) {
+    --bb-header-height: 184px; // 144px + 40px promo bar
+  }
+}
+
 // --- Semantic spacing tokens -------------------------------------------------
 :root {
   --bb-flow-space:          1.5625rem;

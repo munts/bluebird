@@ -43,7 +43,7 @@
   {# Main nav row: logo left, primary menu right #}
   <nav class="navigation" aria-label="{{ labels.ariaLabel|e }}">
     <div class="container">
-      {% include 'Partials/_logo.twig' with {'logo': logo, 'site': site} only %}
+      {% include 'Partials/_logo.twig' with {'logo': logo, 'logoIcon': logoIcon, 'logoWordmark': logoWordmark, 'site': site} only %}
       {% if menu %}
         <div class="menu-band">
           {% include 'Partials/_menu.twig' with {'items': menu.items} only %}

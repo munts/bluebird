@@ -1,9 +1,30 @@
 .logo {
-  display: block;
+  align-items: flex-end;
+  display: flex;
   flex-shrink: 0;
+  gap: 0.5rem;
   text-decoration: none;
 
   &-image {
+    block-size: auto;
+    display: block;
+    inline-size: auto;
+    max-block-size: calc(var(--navigation-height) - 24px);
+  }
+
+  // Split logo: the icon is taller than the nav row and pulled up by the
+  // same amount via a negative margin, so it overlaps into the utility bar
+  // above while staying bottom-aligned with the wordmark (flex-end above).
+  // .navigation's overflow: visible (Components/NavigationMain/_style.scss)
+  // is what lets it render outside the row instead of getting clipped.
+  &-icon {
+    block-size: calc(var(--navigation-height) + 28px);
+    display: block;
+    inline-size: auto;
+    margin-block-start: -28px;
+  }
+
+  &-wordmark {
     block-size: auto;
     display: block;
     inline-size: auto;
