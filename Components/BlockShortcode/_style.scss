@@ -16,11 +16,11 @@ flynt-component[name='BlockShortcode'] {
 
     h2,
     h3{
-      color: var(--color-accent-headline);
+      color: var(--bb-blue-500);
       font-weight: 500;
       line-height: 1.0;
       text-align: center;
-      text-transform: capitalize;
+      text-transform: uppercase;
     }
 
     h4 {
