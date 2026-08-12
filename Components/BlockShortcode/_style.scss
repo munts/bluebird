@@ -13,6 +13,20 @@ flynt-component[name='BlockShortcode'] {
   &[data-bg='white'] {
     background-color: hsla(0, 0%, 100%, 1);
     color: hsla(0, 0%, 19%, 1);
+
+    h2,
+    h3{
+      color: var(--color-accent-headline);
+      font-weight: 500;
+      line-height: 1.0;
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    h4 {
+      color: var();
+      text-transform: capitalize;
+    }
   }
 
   .contentAbove {

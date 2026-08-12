@@ -87,11 +87,15 @@ flynt-component[name='BlockImageText'] {
     color: hsla(0, 0%, 100%, 1);
 
     h2,
-    h3,
-    h4{
+    h3{
       color: hsla(0, 0%, 100%, 1);
       font-weight: 500;
       line-height: 1.0;
+      text-transform: capitalize;
+    }
+
+    h4 {
+      color: var(--color-accent-headline);
       text-transform: capitalize;
     }
 
