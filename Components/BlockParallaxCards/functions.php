@@ -6,7 +6,7 @@ function getACFLayout(): array
 {
     return [
         'name' => 'blockParallaxCards',
-        'label' => __('Block: Cards', 'flynt'),
+        'label' => __('Block: Parallax Cards', 'flynt'),
         'sub_fields' => [
             [
                 'label' => __('Content', 'flynt'),

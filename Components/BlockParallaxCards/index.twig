@@ -3,11 +3,11 @@
 
     {% if eyebrowText or headline %}
       <div class="header">
-        {% if eyebrowText %}
-          <p class="eyebrow">{{ eyebrowText }}</p>
-        {% endif %}
         {% if headline %}
           <h2 class="headline">{{ headline }}</h2>
+        {% endif %}
+        {% if eyebrowText %}
+          <p class="eyebrow">{{ eyebrowText }}</p>
         {% endif %}
       </div>
     {% endif %}
