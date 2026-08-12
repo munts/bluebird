@@ -173,6 +173,7 @@ flynt-component[name='FooterCta'] {
   h3 {
     color: var(--heading-color);
     margin-block-start: 0.75rem;
+    text-transform: capitalize;
   }
 
   h4 {
