@@ -5,7 +5,13 @@
   {% if intro %}
     <p class="intro">{{ intro|e }}</p>
   {% endif %}
-  {% if tiers or eyebrow or footnote %}
+  {% if contentType == 'image' %}
+    {% if promoImage %}
+      <div class="promo-image">
+        <img src="{{ promoImage.src }}" alt="{{ promoImage.alt }}" width="{{ promoImage.width }}" height="{{ promoImage.height }}">
+      </div>
+    {% endif %}
+  {% elseif tiers or eyebrow or footnote %}
     <div class="tiers-box">
       {% if birdIcon %}
         <img class="bird-icon" src="{{ birdIcon.src }}" alt="{{ birdIcon.alt }}" width="{{ birdIcon.width }}" height="{{ birdIcon.height }}">

@@ -38,6 +38,16 @@ flynt-component[name='SidebarPromo'] {
     position: relative;
   }
 
+  .promo-image {
+    margin-block-start: 1.5rem;
+
+    img {
+      border-radius: 12px;
+      display: block;
+      inline-size: 100%;
+    }
+  }
+
   .bird-icon {
     block-size: 3.5rem;
     inline-size: auto;
@@ -188,6 +198,10 @@ flynt-component[name='SidebarPromo'] {
     .tiers-box {
       margin-block-start: 1rem;
       padding-block: 1rem 0.75rem;
+    }
+
+    .promo-image {
+      margin-block-start: 1rem;
     }
 
     .bird-icon {

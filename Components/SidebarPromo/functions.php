@@ -14,6 +14,15 @@ function getPromoFields(): array
             'name' => 'eyebrow',
             'type' => 'text',
             'required' => 0,
+            'conditional_logic' => [
+                [
+                    [
+                        'fieldPath' => 'contentType',
+                        'operator' => '==',
+                        'value' => 'text',
+                    ],
+                ],
+            ],
         ],
         [
             'label' => __('Heading', 'flynt'),
@@ -32,6 +41,15 @@ function getPromoFields(): array
             'library' => 'all',
             'mime_types' => 'svg,png',
             'required' => 0,
+            'conditional_logic' => [
+                [
+                    [
+                        'fieldPath' => 'contentType',
+                        'operator' => '==',
+                        'value' => 'text',
+                    ],
+                ],
+            ],
         ],
         [
             'label' => __('Intro Text', 'flynt'),
@@ -42,12 +60,32 @@ function getPromoFields(): array
             'required' => 0,
         ],
         [
+            'label' => __('Promo Content Type', 'flynt'),
+            'instructions' => __('Choose whether the promo box below the intro shows the offer text (eyebrow, tiers, footnote) or a single image. It is always one or the other, never both.', 'flynt'),
+            'name' => 'contentType',
+            'type' => 'button_group',
+            'choices' => [
+                'text' => __('Text', 'flynt'),
+                'image' => __('Image', 'flynt'),
+            ],
+            'default_value' => 'text',
+        ],
+        [
             'label' => __('Offer Tiers', 'flynt'),
             'instructions' => __('e.g. Number: "5", Unit: "Windows", Discount: "10%". For a non-numeric row (e.g. Siding), leave Unit blank and put the word in Number, e.g. Number: "Siding", Discount: "20%".', 'flynt'),
             'name' => 'tiers',
             'type' => 'repeater',
             'layout' => 'table',
             'button_label' => __('Add Tier', 'flynt'),
+            'conditional_logic' => [
+                [
+                    [
+                        'fieldPath' => 'contentType',
+                        'operator' => '==',
+                        'value' => 'text',
+                    ],
+                ],
+            ],
             'sub_fields' => [
                 [
                     'label' => __('Number', 'flynt'),
@@ -76,6 +114,34 @@ function getPromoFields(): array
             'name' => 'footnote',
             'type' => 'text',
             'required' => 0,
+            'conditional_logic' => [
+                [
+                    [
+                        'fieldPath' => 'contentType',
+                        'operator' => '==',
+                        'value' => 'text',
+                    ],
+                ],
+            ],
+        ],
+        [
+            'label' => __('Promo Image', 'flynt'),
+            'instructions' => __('Shown instead of the offer box above when Promo Content Type is set to Image.', 'flynt'),
+            'name' => 'promoImage',
+            'type' => 'image',
+            'return_format' => 'array',
+            'preview_size' => 'medium',
+            'mime_types' => 'jpg,jpeg,png,svg,webp',
+            'required' => 0,
+            'conditional_logic' => [
+                [
+                    [
+                        'fieldPath' => 'contentType',
+                        'operator' => '==',
+                        'value' => 'image',
+                    ],
+                ],
+            ],
         ],
         [
             'label' => __('Primary Button Label', 'flynt'),
