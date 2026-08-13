@@ -7,9 +7,9 @@
   {% endif %}
   {% if contentType == 'image' %}
     {% if promoImage %}
-      <div class="promo-image">
+      <a class="promo-image" href="#free-estimate">
         <img src="{{ promoImage.src }}" alt="{{ promoImage.alt }}" width="{{ promoImage.width }}" height="{{ promoImage.height }}">
-      </div>
+      </a>
     {% endif %}
   {% elseif tiers or eyebrow or footnote %}
     <div class="tiers-box">

@@ -3,7 +3,9 @@ flynt-component[name='SidebarPromo'] {
   display: block;
   margin-inline: auto;
   max-inline-size: 420px;
-  padding: var(--container-spacing);
+  padding-block-end: var(--container-spacing);
+  padding-block-start: 0.75rem;
+  padding-inline: var(--container-spacing);
 
   // Above tablet-horizontal this sits in the ~320px sticky sidebar column,
   // which already constrains its width — so the cap above (needed once it
@@ -39,7 +41,10 @@ flynt-component[name='SidebarPromo'] {
   }
 
   .promo-image {
+    display: block;
+    inline-size: 100%;
     margin-block-start: 1.5rem;
+    margin-inline: auto;
 
     img {
       border-radius: 12px;
@@ -246,6 +251,32 @@ flynt-component[name='SidebarPromo'] {
     .btn-secondary {
       margin-block-start: 0.5rem;
       padding-block: 0.375rem;
+    }
+  }
+
+  // Image-mode promo: the heading/intro would otherwise force the whole
+  // sticky box taller than short viewports have room for. Below 900px the
+  // heading/intro are dropped so the image (the actual offer content) can
+  // take priority, then scaled down further as height keeps shrinking so
+  // its fine print stays legible.
+  @media (min-width: $breakpoint-tablet-horizontal) and (max-height: 899px) {
+    &:has(.promo-image) {
+      .heading,
+      .intro {
+        display: block;
+        font-size: 1.0rem;
+        margin-block-start: 0;
+      }
+    }
+
+    .promo-image {
+      inline-size: 85%;
+    }
+  }
+
+  @media (min-width: $breakpoint-tablet-horizontal) and (max-height: 799px) {
+    .promo-image {
+      inline-size: 65%;
     }
   }
 }
