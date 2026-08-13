@@ -97,7 +97,7 @@ flynt-component[name='FooterCta'] {
   }
 
   .col-form {
-    background-color: hsl(0, 0%, 14%);
+    background-color: hsl(0, 0%, 45%);
     border-radius: 8px;
     flex: 0 0 420px;
     padding-block: 2rem;
@@ -172,6 +172,7 @@ flynt-component[name='FooterCta'] {
 
   h3 {
     color: var(--heading-color);
+    line-height: 1.1;
     margin-block-start: 0.75rem;
     text-transform: capitalize;
   }
