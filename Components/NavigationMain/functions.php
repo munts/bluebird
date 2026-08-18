@@ -224,10 +224,11 @@ Options::addTranslatable('NavigationMain', [
                 'wrapper' => ['width' => '25'],
             ],
             [
-                'label' => __('Free Estimate Form ID', 'flynt'),
-                'instructions' => __('Gravity Form ID to load in the modal.', 'flynt'),
-                'name' => 'freeEstimateFormId',
-                'type' => 'number',
+                'label' => __('Free Estimate Button URL', 'flynt'),
+                'instructions' => __('Anchor (e.g. "#free-estimate" to link to the FooterCta form) or full URL to a different form/page.', 'flynt'),
+                'name' => 'ctaFreeEstimateUrl',
+                'type' => 'text',
+                'default_value' => '#free-estimate',
                 'wrapper' => ['width' => '25'],
             ],
             [
