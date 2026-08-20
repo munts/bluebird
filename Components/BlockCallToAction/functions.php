@@ -152,6 +152,8 @@ function getACFLayout(): array
                         'append' => '%',
                     ],
                     FieldVariables\getSize('medium'),
+                    FieldVariables\getAlignment(['default' => 'center']),
+                    FieldVariables\getTextAlignment(['default' => 'center']),
                     [
                         'label' => __('Reduce Spacing', 'flynt'),
                         'instructions' => __('Use half the normal top and bottom spacing for this component.', 'flynt'),

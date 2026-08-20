@@ -22,7 +22,7 @@
     {% endif %}
   {% endif %}
   <div class="container">
-    <div class="content" data-size="{{ options.size ?: 'medium' }}" data-align="center" data-text-align="center">
+    <div class="content" data-size="{{ options.size ?: 'medium' }}" data-align="{{ options.align ?: 'center' }}" data-text-align="{{ options.textAlign ?: 'center' }}">
       {% if eyebrow %}
         <p class="eyebrow">{{ eyebrow|e }}</p>
       {% endif %}

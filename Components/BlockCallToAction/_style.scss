@@ -43,6 +43,10 @@ flynt-component[name='BlockCallToAction'] {
     margin-block-start: var(--flow-space);
   }
 
+  .content[data-text-align="left"] .actions {
+    justify-content: flex-start;
+  }
+
   .btn {
     --btn-border-radius: 0;
     --btn-border-width: 2px;
