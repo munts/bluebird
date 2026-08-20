@@ -103,7 +103,10 @@ flynt-component[name='BlockCallToAction'] {
 
     // h1/h3/h4 default to var(--bb-color-primary), which is the same navy
     // as the dark theme's background — invisible without this override.
+    // h2's light blue is visible against the dark background but should
+    // still be white on this theme.
     h1,
+    h2,
     h3,
     h4 {
       color: #fff;
