@@ -2,6 +2,11 @@ flynt-component[name='BlockProductStylesGrid'] {
   background-color: var(--bb-charcoal);
   display: block;
   padding-block: var(--component-spacing);
+  scroll-margin-block-start: var(--bb-header-height);
+
+  &:focus {
+    outline: none;
+  }
 
   .preContent {
     margin-block-end: var(--column-gap);
