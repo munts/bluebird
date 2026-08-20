@@ -94,8 +94,11 @@ flynt-component[name='BlockCallToAction'] {
 
   // Theme overrides
   &[data-theme="dark"] {
-    .btn {
-      // Force all buttons into white-outline style
+    // Only --navy needs this: its background is the same navy as the dark
+    // theme's own background, so it'd otherwise disappear like the headings
+    // did. --light-blue and --white-outline-blue are already visible as-is
+    // and keep their chosen style.
+    .btn--navy {
       background-color: transparent;
       border-color: #fff;
       color: #fff;
