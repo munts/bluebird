@@ -100,6 +100,14 @@ flynt-component[name='BlockCallToAction'] {
       border-color: #fff;
       color: #fff;
     }
+
+    // h1/h3/h4 default to var(--bb-color-primary), which is the same navy
+    // as the dark theme's background — invisible without this override.
+    h1,
+    h3,
+    h4 {
+      color: #fff;
+    }
   }
 
   .eyebrow {

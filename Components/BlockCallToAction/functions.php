@@ -4,6 +4,23 @@ namespace Flynt\Components\BlockCallToAction;
 
 use Flynt\FieldVariables;
 
+// The editor picks a heading level from the WYSIWYG's own Format dropdown,
+// which doesn't stop them from re-using H1 on multiple instances of this
+// component on the same page. The Heading Level field is the actual source
+// of truth: rewrite whatever heading tag comes first in the saved HTML to
+// match it, so the page never ends up with more than one intended H1.
+add_filter('Flynt/addComponentData?name=BlockCallToAction', function (array $data): array {
+    if (!empty($data['contentHtml']) && !empty($data['headingLevel'])) {
+        $data['contentHtml'] = preg_replace(
+            '/<h[1-6]([^>]*)>(.*?)<\/h[1-6]>/is',
+            "<{$data['headingLevel']}$1>$2</{$data['headingLevel']}>",
+            $data['contentHtml'],
+            1
+        );
+    }
+    return $data;
+});
+
 function getACFLayout(): array
 {
     return [
@@ -26,12 +43,27 @@ function getACFLayout(): array
             ],
             [
                 'label' => __('Main Content / Heading', 'flynt'),
-                'instructions' => __('Primary heading and/or body content. Use H2 for the main headline.', 'flynt'),
+                'instructions' => __('Primary heading and/or body content. Format the headline with the Format dropdown (Heading 1 or Heading 2) — the Heading Level field below has final say over which tag actually ships.', 'flynt'),
                 'name' => 'contentHtml',
                 'type' => 'wysiwyg',
                 'delay' => 0,
                 'media_upload' => 0,
                 'required' => 0,
+            ],
+            [
+                'label' => __('Heading Level', 'flynt'),
+                'instructions' => __('Overrides whatever heading tag is first in the content above. Use H1 once per page for the primary headline; use H2 for any additional instances of this component on the same page, to keep the page semantically/SEO correct.', 'flynt'),
+                'name' => 'headingLevel',
+                'type' => 'select',
+                'allow_null' => 0,
+                'multiple' => 0,
+                'ui' => 0,
+                'ajax' => 0,
+                'choices' => [
+                    'h1' => __('H1 — Main page headline', 'flynt'),
+                    'h2' => __('H2 — Secondary heading', 'flynt'),
+                ],
+                'default_value' => 'h1',
             ],
             [
                 'label' => __('Subheading Text', 'flynt'),
